@@ -17,6 +17,8 @@ View(EE3.0_1984_1993)
 
 EE3.0_1993_2003 <- read.csv("Data/Raw/EE3.0/EE3.0_1993-2003.csv")
 
+EE3.0_2003_2013 <- read.csv("Data/Raw/EE3.0/EE3.0_2003-2013.csv")
+
 EE3.0_2013_2023 <- read.csv("Data/Raw/EE3.0/EE3.0_2013-2023.csv")
 ```
 
@@ -50,16 +52,61 @@ ET6.2_1993_2003 <- read.csv("Data/Raw/ET6.2/ET6.2_1993-2003.csv")
 
 ET6.2_2003_2013 <- read.csv("Data/Raw/ET6.2/ET6.2_2003-2013.csv")
 
-EE6.2_2013_2023 <- read.csv("Data/Raw/ET6.2/ET6.2_2013-2023.csv")
+ET6.2_2013_2023 <- read.csv("Data/Raw/ET6.2/ET6.2_2013-2023.csv")
 ```
 
-#Importing Data for Site ET6.2
+#Importing Data for Site ET7.1
 ```{r importing data}
-ET6.2_1984_1993 <- read.csv("Data/Raw/ET6.2/ET6.2_1984-1993.csv")
+ET7.1_1984_1993 <- read.csv("Data/Raw/ET7.1/ET7.1_1984-1993.csv")
 
-ET6.2_1993_2003 <- read.csv("Data/Raw/ET6.2/ET6.2_1993-2003.csv")
+ET7.1_1993_2003 <- read.csv("Data/Raw/ET7.1/ET7.1_1993-2003.csv")
 
-ET6.2_2003_2013 <- read.csv("Data/Raw/ET6.2/ET6.2_2003-2013.csv")
+ET7.1_2003_2013 <- read.csv("Data/Raw/ET7.1/ET7.1_2003-2013.csv")
 
-EE6.2_2013_2023 <- read.csv("Data/Raw/ET6.2/ET6.2_2013-2023.csv")
+ET7.1_2013_2023 <- read.csv("Data/Raw/ET7.1/ET7.1_2013-2023.csv")
+```
+
+#Importing Data for Site TRQ0088
+```{r importing data}
+TRQ0088_1993_2003 <- read.csv("Data/Raw/TRQ0088/TRQ0088_1993-2003.csv")
+
+TRQ0088_2003_2013 <- read.csv("Data/Raw/TRQ0088/TRQ0088_2003-2013.csv")
+
+TRQ0088_2013_2023 <- read.csv("Data/Raw/TRQ0088/TRQ0088_2013-2023.csv")
+```
+
+#Importing Data for Site TRQ0146
+```{r importing data}
+TRQ0146_1993_2003 <- read.csv("Data/Raw/TRQ0146/TRQ0146_1993-2003.csv")
+
+TRQ0146_2003_2013 <- read.csv("Data/Raw/TRQ0146/TRQ0146_2003-2013.csv")
+
+TRQ0146_2013_2023 <- read.csv("Data/Raw/TRQ0146/TRQ0146_2013-2023.csv")
+```
+
+#Importing Data for Site CCM0069
+```{r importing data}
+CCM0069_1993_2003 <- read.csv("Data/Raw/CCM0069/CCM0069_1993-2003.csv")
+
+CCM0069_2003_2013 <- read.csv("Data/Raw/CCM0069/CCM0069_2003-2013.csv")
+
+CCM0069_2013_2023 <- read.csv("Data/Raw/CCM0069/CCM0069_2013-2023.csv")
+```
+
+#Importing Data for Site WIW0141
+```{r importing data}
+WIW0141_1993_2003 <- read.csv("Data/Raw/WIW0141/WIW0141_1993-2003.csv")
+
+WIW0141_2003_2013 <- read.csv("Data/Raw/WIW0141/WIW0141_2003-2013.csv")
+
+WIW0141_2013_2023 <- read.csv("Data/Raw/WIW0141/WIW0141_2013-2023.csv")
+```
+
+#Importing Data for Site XDJ9007
+```{r importing data}
+XDJ9007_1993_2003 <- read.csv("Data/Raw/XDJ9007/XDJ9007-1993-2003.csv")
+
+XDJ9007_2003_2013 <- read.csv("Data/Raw/XDJ9007/XDJ9007_2003-2013.csv")
+
+XDJ9007_2013_2023 <- read.csv("Data/Raw/XDJ9007/XDJ9007_2013-2023.csv")
 ```
