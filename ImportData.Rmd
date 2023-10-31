@@ -110,3 +110,14 @@ XDJ9007_2003_2013 <- read.csv("Data/Raw/XDJ9007/XDJ9007_2003-2013.csv")
 
 XDJ9007_2013_2023 <- read.csv("Data/Raw/XDJ9007/XDJ9007_2013-2023.csv")
 ```
+
+#Importing Data for the Remaining Sites
+```{r importing data}
+WQ_1984_1990 <- read.csv("Data/Raw/Other Sites/WQ_1984_1990.csv")
+
+WQ_1991_2001 <- read.csv("Data/Raw/Other Sites/WQ_1991_2001.csv")
+
+WQ_2002_2012 <- read.csv("Data/Raw/Other Sites/WQ_2002_2012.csv")
+
+WQ_2013_2023 <- read.csv("Data/Raw/Other Sites/WQ_2013_2023.csv")
+```
