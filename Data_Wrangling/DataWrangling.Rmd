@@ -23,7 +23,7 @@ Total.WQ.Data <- rbind(CCM0069_1993_2003,CCM0069_2003_2013,CCM0069_2013_2023,EE3
 TN.TP.TSS.Data <- filter(Total.WQ.Data, Parameter == "TN" | Parameter == "TP" | Parameter == "TSS")
 TN.TP.TSS.Data$SampleDate<- as.Date(TN.TP.TSS.Data$SampleDate, format="%m/%d/%Y")
 TN.TP.TSS.Data.Processed <- TN.TP.TSS.Data %>%
-  select(MonitoringStation, SampleDate, SampleTime, Parameter, MeasureValue, Unit, Latitude. Longitude)
+  select(MonitoringStation, SampleDate, SampleTime, Parameter, MeasureValue, Unit, Latitude, Longitude)
+
+write.csv(TN.TP.TSS.Data.Processed, row.names = FALSE, file = "~/Master's Project/Data/Processed/TN_TP_TSS_Data_Processed.csv")
 ```
-
-
