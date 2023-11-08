@@ -41,7 +41,7 @@ ET6.1_1993_2003 <- read.csv("../Data/Raw/ET6.1/ET6.1_1993_2003.csv")
 
 ET6.1_2003_2013 <- read.csv("../Data/Raw/ET6.1/ET6.1_2003_2013.csv")
 
-EE6.1_2013_2023 <- read.csv("../Data/Raw/ET6.1/ET6.1_2013_2023.csv")
+ET6.1_2013_2023 <- read.csv("../Data/Raw/ET6.1/ET6.1_2013_2023.csv")
 ```
 
 #Importing Data for Site ET6.2
