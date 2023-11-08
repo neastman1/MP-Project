@@ -49,11 +49,7 @@ POK0087_2013_2023 <- WQ_2013_2023[WQ_2013_2023$MonitoringStation=="POK0087",]
 XAK7810_2013_2023 <- WQ_2013_2023[WQ_2013_2023$MonitoringStation=="XAK7810",]
 XCI4078_2013_2023 <- WQ_2013_2023[WQ_2013_2023$MonitoringStation=="XCI4078",]
 
-##combining dataframes by site 
-library(tidyverse)
-library(tidyr)
-library(dplyr)
-
+##combining dataframes by site
 
 # BXK0031_list <- list(BXK0031_2002_2012, BXK0031_2013_2023)
 # BXK0031 <- Reduce(function(x, y) merge(x, y, all=TRUE), BXK0031_list) 
