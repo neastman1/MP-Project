@@ -34,9 +34,14 @@ TN.TP.TSS.Data.Processed <- TN.TP.TSS.Data.Processed %>%
 ##pivot wider
 TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Processed %>%
   pivot_wider(names_from = Parameter, 
-    values_from = MeasureValue)
+    values_from = MeasureValue,
+    values_fn = mean) 
+
 View(TN.TP.TSS.Data.Final)
 class(TN.TP.TSS.Data.Final)
 
-write.csv(TN.TP.TSS.Data.Processed, row.names = FALSE, file = "~/Master's Project/Data/Processed/TN_TP_TSS_Data_Processed.csv")
+# write.csv(TN.TP.TSS.Data.Processed, row.names = FALSE, file = "~/Master's Project/Data/Processed/TN_TP_TSS_Data_Processed.csv")
+
+write.csv(TN.TP.TSS.Data.Final, row.names = FALSE, file = "../Data/Processed/TN_TP_TSS_Data_Final.csv")
+
 ```
