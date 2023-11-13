@@ -33,7 +33,8 @@ TN.TP.TSS.Data.Processed <- TN.TP.TSS.Data.Processed %>%
 
 ##pivot wider
 TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Processed %>%
-  pivot_wider(names_from = Parameter, values_from = MeasureValue)
+  pivot_wider(names_from = Parameter, 
+    values_from = MeasureValue)
 View(TN.TP.TSS.Data.Final)
 class(TN.TP.TSS.Data.Final)
 
