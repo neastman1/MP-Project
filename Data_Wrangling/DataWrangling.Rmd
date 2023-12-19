@@ -44,4 +44,30 @@ class(TN.TP.TSS.Data.Final)
 
 write.csv(TN.TP.TSS.Data.Final, row.names = FALSE, file = "../Data/Processed/TN_TP_TSS_Data_Final.csv")
 
+TN.TP.TSS.Data.Final %>% count(MonitoringStation)
+```
+
+## Separate by station for time series
+```{r}
+BXK0031_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "BXK0031")
+CCM0069_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "CCM0069")
+EE3.0_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "EE3.0")
+EE3.1_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "EE3.1")
+EE3.2_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "EE3.2")
+EE3.3_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "EE3.3")
+ET6.1_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "ET6.1")
+ET6.2_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "ET6.2")
+ET7.1_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "ET7.1")
+ET8.1_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "ET8.1")
+ET9.1_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "ET9.1")
+ET10.1_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "ET10.1")
+MNK0146_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "MNK0146")
+POK0087_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "POK0087")
+TRQ0088_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "TRQ0088")
+TRQ0146_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "TRQ0146")
+WIW0141_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "WIW0141")
+WIW0144_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "WIW0144")
+XAK7810_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "XAK7810")
+XCI4078_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "XCI4078")
+XDJ9007_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "XDJ9007")
 ```
