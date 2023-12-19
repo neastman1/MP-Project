@@ -43,8 +43,6 @@ class(TN.TP.TSS.Data.Final)
 # write.csv(TN.TP.TSS.Data.Processed, row.names = FALSE, file = "~/Master's Project/Data/Processed/TN_TP_TSS_Data_Processed.csv")
 
 write.csv(TN.TP.TSS.Data.Final, row.names = FALSE, file = "../Data/Processed/TN_TP_TSS_Data_Final.csv")
-
-TN.TP.TSS.Data.Final %>% count(MonitoringStation)
 ```
 
 ## Separate by station for time series
