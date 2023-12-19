@@ -4,8 +4,35 @@ author: "Nicole"
 date: "2023-11-07"
 output: html_document
 ---
+## Objectives
+1. Identify nutrient trends over time for each monitoring station
+2. Compare to the TSS
 
+## Set up
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+#install.packages("tidyverse")
+library(tidyverse)
+#install.packages("trend")
+library(trend)
+#install.packages("zoo")
+library(zoo)
+#install.packages("Kendall")
+library(Kendall)
+#install.packages("tseries")
+library(tseries)
+
+#Set Theme
+mytheme <- theme_classic(base_size = 14) + theme(axis.text = element_text(color = "black"), legend.position = "top")
+theme_set(mytheme)
 ```
 
+## Import Dataset
+```{r}
+read.csv("../Data/Processed/TN_TP_TSS_Data_Processed.csv")
+```
+
+## Initial Plots
+```{r}
+ggplot(TN.TP.TSS.Data.Processed, aes(x = SampleDate, y = ))
+```
