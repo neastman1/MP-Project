@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 install.packages("plyr")
 library("plyr")
 library("dplyr")
+library(tidyverse)
+library(tidyr)
 
 ```
 
@@ -25,5 +27,21 @@ TN.TP.TSS.Data$SampleDate<- as.Date(TN.TP.TSS.Data$SampleDate, format="%m/%d/%Y"
 TN.TP.TSS.Data.Processed <- TN.TP.TSS.Data %>%
   select(MonitoringStation, SampleDate, SampleTime, Parameter, MeasureValue, Unit, Latitude, Longitude)
 
-write.csv(TN.TP.TSS.Data.Processed, row.names = FALSE, file = "~/Master's Project/Data/Processed/TN_TP_TSS_Data_Processed.csv")
+##remove unit column (they're all MG/L)
+TN.TP.TSS.Data.Processed <- TN.TP.TSS.Data.Processed %>%
+  select(MonitoringStation, SampleDate, SampleTime, Parameter, MeasureValue, Latitude, Longitude)
+
+##pivot wider
+TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Processed %>%
+  pivot_wider(names_from = Parameter, 
+    values_from = MeasureValue,
+    values_fn = mean) 
+
+View(TN.TP.TSS.Data.Final)
+class(TN.TP.TSS.Data.Final)
+
+# write.csv(TN.TP.TSS.Data.Processed, row.names = FALSE, file = "~/Master's Project/Data/Processed/TN_TP_TSS_Data_Processed.csv")
+
+write.csv(TN.TP.TSS.Data.Final, row.names = FALSE, file = "../Data/Processed/TN_TP_TSS_Data_Final.csv")
+
 ```
