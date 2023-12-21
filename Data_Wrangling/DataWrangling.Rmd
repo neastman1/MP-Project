@@ -77,9 +77,10 @@ plot.chrs <- function(list.dfs) {
   plot.list <- vector(mode = 'list', length = length(list.dfs))
   
   for (i in 1:length(list.dfs)) {
-    plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=SampleDate, y=TP)) +
-                       geom_line()
-    names(plot.list)[i] <- paste0('Monitoring Station', i)
+    plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=SampleDate, y=TN)) +
+                      geom_line() +
+                      ggtitle(list.dfs[[i]]$MonitoringStation)
+    names(plot.list)[i] <- paste0(list.dfs[[i]]$MonitoringStation)
   }
   return(plot.list)
 }
@@ -87,4 +88,9 @@ plot.chrs(list.dfs)
 
 ET6.1 <- ggplot(ET6.1_TN_TP_TSS, aes(x=SampleDate, y=TN)) + geom_line() + scale_x_date(date_labels = "%Y-%m-%d")
 ET6.1
+
+WIW0141 <- ggplot(WIW0141_TN_TP_TSS, aes(x=SampleDate, y=TN)) + geom_line() + scale_x_date(date_labels = "%Y-%m-%d")
+WIW0141
+
+
 ```
