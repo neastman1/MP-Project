@@ -69,3 +69,22 @@ XAK7810_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "XAK7810"
 XCI4078_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "XCI4078")
 XDJ9007_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "XDJ9007")
 ```
+
+```{r}
+list.dfs <- list(BXK0031_TN_TP_TSS,CCM0069_TN_TP_TSS,EE3.0_TN_TP_TSS,EE3.1_TN_TP_TSS,EE3.2_TN_TP_TSS,EE3.3_TN_TP_TSS,ET6.1_TN_TP_TSS,ET6.2_TN_TP_TSS,ET7.1_TN_TP_TSS,ET8.1_TN_TP_TSS,ET9.1_TN_TP_TSS,ET10.1_TN_TP_TSS,MNK0146_TN_TP_TSS,POK0087_TN_TP_TSS,TRQ0088_TN_TP_TSS,TRQ0146_TN_TP_TSS,WIW0141_TN_TP_TSS,WIW0144_TN_TP_TSS,XAK7810_TN_TP_TSS,XCI4078_TN_TP_TSS,XDJ9007_TN_TP_TSS)
+
+plot.chrs <- function(list.dfs) { 
+  plot.list <- vector(mode = 'list', length = length(list.dfs))
+  
+  for (i in 1:length(list.dfs)) {
+    plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=SampleDate, y=TP)) +
+                       geom_line()
+    names(plot.list)[i] <- paste0('Monitoring Station', i)
+  }
+  return(plot.list)
+}
+plot.chrs(list.dfs)
+
+ET6.1 <- ggplot(ET6.1_TN_TP_TSS, aes(x=SampleDate, y=TN)) + geom_line() + scale_x_date(date_labels = "%Y-%m-%d")
+ET6.1
+```
