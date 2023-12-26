@@ -94,3 +94,54 @@ WIW0141
 
 
 ```
+
+## Removing data gaps
+```{r}
+BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
+  filter(SampleDate < as.Date("2013-12-31"))
+BXK0031_TN_TP_TSS.Late <- BXK0031_TN_TP_TSS %>%
+  filter(SampleDate > as.Date("2013-12-31"))
+
+CCM0069_TN_TP_TSS.Complete <- CCM0069_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+CCM0069_TN_TP_TSS.Early <- CCM0069_TN_TP_TSS.Complete %>%
+  filter(SampleDate < as.Date("2013-12-31"))
+CCM0069_TN_TP_TSS.Late <- CCM0069_TN_TP_TSS.Complete %>%
+  filter(SampleDate > as.Date("2013-12-31"))
+
+EE3.0_TN_TP_TSS.Complete <- EE3.0_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+EE3.1_TN_TP_TSS.Complete <- EE3.1_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+EE3.2_TN_TP_TSS.Complete <- EE3.2_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+EE3.3_TN_TP_TSS.Complete <- EE3.3_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+#ET6.1 we need help
+
+ET6.2_TN_TP_TSS.Complete <- ET6.2_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+ET7.1_TN_TP_TSS.Complete <- ET7.1_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+ET8.1_TN_TP_TSS.Complete <- ET8.1_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+ET9.1_TN_TP_TSS.Complete <- ET9.1_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+ET10.1_TN_TP_TSS.Complete <- ET10.1_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+MNK0146_TN_TP_TSS.Early <- MNK0146_TN_TP_TSS.Complete %>%
+  filter(SampleDate < as.Date("2013-12-31"))
+MNK0146_TN_TP_TSS.Late <- MNK0146_TN_TP_TSS.Complete %>%
+  filter(SampleDate > as.Date("2013-12-31"))
+```
