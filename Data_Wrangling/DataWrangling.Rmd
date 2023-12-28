@@ -92,7 +92,6 @@ ET6.1
 WIW0141 <- ggplot(WIW0141_TN_TP_TSS, aes(x=SampleDate, y=TN)) + geom_line() + scale_x_date(date_labels = "%Y-%m-%d")
 WIW0141
 
-
 ```
 
 ## Removing data gaps
@@ -143,5 +142,57 @@ MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS %>%
 MNK0146_TN_TP_TSS.Early <- MNK0146_TN_TP_TSS.Complete %>%
   filter(SampleDate < as.Date("2013-12-31"))
 MNK0146_TN_TP_TSS.Late <- MNK0146_TN_TP_TSS.Complete %>%
+  filter(SampleDate > as.Date("2013-12-31"))
+
+POK0087_TN_TP_TSS.Complete <- POK0087_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+POK0087_TN_TP_TSS.Early <- POK0087_TN_TP_TSS.Complete %>%
+  filter(SampleDate < as.Date("2014-12-31"))
+POK0087_TN_TP_TSS.Late <- POK0087_TN_TP_TSS.Complete %>%
+  filter(SampleDate > as.Date("2014-12-31"))
+
+TRQ0088_TN_TP_TSS.Complete <- TRQ0088_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+TRQ0088_TN_TP_TSS.Early <- TRQ0088_TN_TP_TSS.Complete %>%
+  filter(SampleDate < as.Date("2013-12-31"))
+TRQ0088_TN_TP_TSS.Late <- TRQ0088_TN_TP_TSS.Complete %>%
+  filter(SampleDate > as.Date("2013-12-31"))
+
+TRQ0146_TN_TP_TSS.Complete <- TRQ0146_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+TRQ0146_TN_TP_TSS.Early <- TRQ0146_TN_TP_TSS.Complete %>%
+  filter(SampleDate < as.Date("2013-12-31"))
+TRQ0146_TN_TP_TSS.Late <- TRQ0146_TN_TP_TSS.Complete %>%
+  filter(SampleDate > as.Date("2013-12-31"))
+
+WIW0141_TN_TP_TSS.Complete <- WIW0141_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+WIW0141_TN_TP_TSS.Early <- WIW0141_TN_TP_TSS.Complete %>%
+  filter(SampleDate < as.Date("2003-12-31"))
+WIW0141_TN_TP_TSS.Late <- WIW0141_TN_TP_TSS.Complete %>%
+  filter(SampleDate > as.Date("2003-12-31"))
+
+WIW0144_TN_TP_TSS.Complete <- WIW0144_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+
+XAK7810_TN_TP_TSS.Complete <- XAK7810_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+XAK7810_TN_TP_TSS.Early <- XAK7810_TN_TP_TSS.Complete %>%
+  filter(SampleDate < as.Date("2014-12-31"))
+XAK7810_TN_TP_TSS.Late <- XAK7810_TN_TP_TSS.Complete %>%
+  filter(SampleDate > as.Date("2014-12-31"))
+
+XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+XCI4078_TN_TP_TSS.Early <- XCI4078_TN_TP_TSS.Complete %>%
+  filter(SampleDate < as.Date("2013-12-31"))
+XCI4078_TN_TP_TSS.Late <- XCI4078_TN_TP_TSS.Complete %>%
+  filter(SampleDate > as.Date("2013-12-31"))
+
+XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS %>%
+  drop_na(TN, TP, TSS)
+XDJ9007_TN_TP_TSS.Early <- XDJ9007_TN_TP_TSS.Complete %>%
+  filter(SampleDate < as.Date("2013-12-31"))
+XDJ9007_TN_TP_TSS.Late <- XDJ9007_TN_TP_TSS.Complete %>%
   filter(SampleDate > as.Date("2013-12-31"))
 ```

@@ -27,12 +27,13 @@ mytheme <- theme_classic(base_size = 14) + theme(axis.text = element_text(color 
 theme_set(mytheme)
 ```
 
-## Import Dataset
+## Import Datasets
 ```{r}
-read.csv("../Data/Processed/TN_TP_TSS_Data_Final.csv")
+
 ```
 
-## Initial Plots
+## Decomposing datasets for time series
 ```{r}
-ggplot(TN_TP_TSS_Data_Final, aes(x = SampleDate, y = ))
+
+
 ```
