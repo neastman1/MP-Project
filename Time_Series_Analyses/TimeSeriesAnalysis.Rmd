@@ -34,6 +34,19 @@ theme_set(mytheme)
 
 ## Decomposing datasets for time series
 ```{r}
+# Create a time series object
+BXK0031_TN_TP_TSS.Early.ts <- ts(BXK0031_TN_TP_TSS.Early$TN, start = c(2003,3), end = c(2013, 12), frequency =12)
 
+BXK0031_TN_TP_TSS.Late.ts <- ts(BXK0031_TN_TP_TSS.Late$TN, start = c(2020,1), end = c(2022, 12), frequency =12)
+
+# Generate the decomposition
+BXK0031_TN_TP_TSS.Early.Decomposed <- stl(BXK0031_TN_TP_TSS.Early.ts, s.window = "periodic")
+
+BXK0031_TN_TP_TSS.Late.Decomposed <- stl(BXK0031_TN_TP_TSS.Late.ts, s.window = "periodic")
+
+#Visualize the decomposed series
+plot(BXK0031_TN_TP_TSS.Early.Decomposed)
+
+plot(BXK0031_TN_TP_TSS.Late.Decomposed)
 
 ```
