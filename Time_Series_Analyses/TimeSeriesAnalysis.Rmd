@@ -22,6 +22,7 @@ library(Kendall)
 #install.packages("tseries")
 library(tseries)
 
+
 #Set Theme
 mytheme <- theme_classic(base_size = 14) + theme(axis.text = element_text(color = "black"), legend.position = "top")
 theme_set(mytheme)
@@ -48,5 +49,18 @@ BXK0031_TN_TP_TSS.Late.Decomposed <- stl(BXK0031_TN_TP_TSS.Late.ts, s.window = "
 plot(BXK0031_TN_TP_TSS.Early.Decomposed)
 
 plot(BXK0031_TN_TP_TSS.Late.Decomposed)
+
+#Running Mann-Kendall Test
+BXK0031.Early.MK <- MannKendall(BXK0031_TN_TP_TSS.Early.ts)
+BXK0031.Early.MK
+summary(BXK0031.Early.MK)
+
+#Visualize Trend
+plot(BXK0031_TN_TP_TSS.Early.ts)
+lines(lowess(time(BXK0031_TN_TP_TSS.Early.ts), BXK0031_TN_TP_TSS.Early.ts), col= 'blue')
+
+#Running Seasonal MK
+BXK0031.Early.SMK <- SeasonalMannKendall(BXK0031_TN_TP_TSS.Early.ts)
+summary(BXK0031.Early.SMK)
 
 ```
