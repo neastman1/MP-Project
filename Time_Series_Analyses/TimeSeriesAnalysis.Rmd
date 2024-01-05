@@ -36,31 +36,31 @@ theme_set(mytheme)
 ## Decomposing datasets for time series
 ```{r}
 # Create a time series object
-BXK0031_TN_TP_TSS.Early.ts <- ts(BXK0031_TN_TP_TSS.Early$TN, start = c(2003,3), end = c(2013, 12), frequency =12)
+BXK0031_TN.Early.ts <- ts(BXK0031_TN_TP_TSS.Early$TN, start = c(2003,3), end = c(2013, 12), frequency =12)
 
-BXK0031_TN_TP_TSS.Late.ts <- ts(BXK0031_TN_TP_TSS.Late$TN, start = c(2020,1), end = c(2022, 12), frequency =12)
+BXK0031_TN.Late.ts <- ts(BXK0031_TN_TP_TSS.Late$TN, start = c(2020,1), end = c(2022, 12), frequency =12)
 
 # Generate the decomposition
-BXK0031_TN_TP_TSS.Early.Decomposed <- stl(BXK0031_TN_TP_TSS.Early.ts, s.window = "periodic")
+BXK0031_TN.Early.Decomposed <- stl(BXK0031_TN.Early.ts, s.window = "periodic")
 
-BXK0031_TN_TP_TSS.Late.Decomposed <- stl(BXK0031_TN_TP_TSS.Late.ts, s.window = "periodic")
+BXK0031_TN.Late.Decomposed <- stl(BXK0031_TN.Late.ts, s.window = "periodic")
 
 #Visualize the decomposed series
-plot(BXK0031_TN_TP_TSS.Early.Decomposed)
+plot(BXK0031_TN.Early.Decomposed)
 
-plot(BXK0031_TN_TP_TSS.Late.Decomposed)
+plot(BXK0031_TN.Late.Decomposed)
 
 #Running Mann-Kendall Test
-BXK0031.Early.MK <- MannKendall(BXK0031_TN_TP_TSS.Early.ts)
+BXK0031.Early.MK <- MannKendall(BXK0031_TN.Early.ts)
 BXK0031.Early.MK
 summary(BXK0031.Early.MK)
 
-#Visualize Trend
-plot(BXK0031_TN_TP_TSS.Early.ts)
-lines(lowess(time(BXK0031_TN_TP_TSS.Early.ts), BXK0031_TN_TP_TSS.Early.ts), col= 'blue')
+#Visualize Trend ## what does this mean??
+plot(BXK0031_TN.Early.ts)
+lines(lowess(time(BXK0031_TN.Early.ts), BXK0031_TN.Early.ts), col= 'blue')
 
 #Running Seasonal MK
-BXK0031.Early.SMK <- SeasonalMannKendall(BXK0031_TN_TP_TSS.Early.ts)
+BXK0031.Early.SMK <- SeasonalMannKendall(BXK0031_TN.Early.ts)
 summary(BXK0031.Early.SMK)
 
 ```

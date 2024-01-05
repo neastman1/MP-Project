@@ -96,7 +96,7 @@ WIW0141
 
 ```
 
-## Removing data gaps or should we interpolaate?
+## Removing data gaps or should we interpolate?
 ```{r}
 BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
   filter(SampleDate < as.Date("2013-12-31"))
