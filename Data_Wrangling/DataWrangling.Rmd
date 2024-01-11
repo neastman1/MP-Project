@@ -91,7 +91,7 @@ plot.chrs(list.dfs)
 ET6.1 <- ggplot(ET6.1_TN_TP_TSS, aes(x=SampleDate, y=TN)) + geom_line() + scale_x_date(date_labels = "%Y-%m-%d")
 ET6.1
 
-WIW0141 <- ggplot(WIW0141_TN_TP_TSS, aes(x=SampleDate, y=TN)) + geom_line() + scale_x_date(date_labels = "%Y-%m-%d")
+WIW0141 <- ggplot(WIW0141_TN_TP_TSS, aes(x=SampleDate, y=TN)) + geom_line()
 WIW0141
 
 ```
