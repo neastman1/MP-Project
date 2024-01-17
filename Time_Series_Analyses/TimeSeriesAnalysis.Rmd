@@ -36,7 +36,7 @@ theme_set(mytheme)
 ## Decomposing datasets for time series
 ```{r}
 # Create a time series object
-BXK0031_TN.Early.ts <- ts(BXK0031_TN_TP_TSS.Early$TN, start = c(2003,3), end = c(2013, 12), frequency =12)
+BXK0031_TN.Early.ts <- ts(BXK0031_TN_TP_TSS.Early$TP, start = c(2003,3), frequency =12)
 
 BXK0031_TN.Late.ts <- ts(BXK0031_TN_TP_TSS.Late$TN, start = c(2020,1), end = c(2022, 12), frequency =12)
 

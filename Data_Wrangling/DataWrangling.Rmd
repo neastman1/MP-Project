@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 install.packages("plyr")
+install.packages("lubridate")
 library("plyr")
 library("dplyr")
 library(tidyverse)
@@ -22,7 +23,7 @@ Total.WQ.Data <- rbind(CCM0069_1993_2003,CCM0069_2003_2013,CCM0069_2013_2023,EE3
 
 #Making a dataset for TN, TP, TSS
 ```{r}
-TN.TP.TSS.Data <- filter(Total.WQ.Data, Parameter == "TN" | Parameter == "TP" | Parameter == "TSS")
+TN.TP.TSS.Data <- filter(Total.WQ.Data, Parameter == "TN" | Parameter == "TP" | Parameter == "TSS") 
 TN.TP.TSS.Data$SampleDate<- as.Date(TN.TP.TSS.Data$SampleDate, format="%m/%d/%Y")
 TN.TP.TSS.Data.Processed <- TN.TP.TSS.Data %>%
   select(MonitoringStation, SampleDate, SampleTime, Parameter, MeasureValue, Unit, Latitude, Longitude)
@@ -100,6 +101,9 @@ WIW0141
 ```{r}
 BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
   filter(SampleDate < as.Date("2013-12-31"))
+
+  BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS.Early[order(BXK0031_TN_TP_TSS$SampleDate),]
+
 BXK0031_TN_TP_TSS.Late <- BXK0031_TN_TP_TSS %>%
   filter(SampleDate > as.Date("2013-12-31"))
 
