@@ -150,20 +150,21 @@ WIW0141
 
 ## Removing data gaps
 ```{r}
-BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
-  filter(SampleDate < as.Date("2013-12-31"))
+# BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
+#   filter(SampleDate < as.Date("2013-12-31"))
+
 ##change formatting
 BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 ##ordering dataframe
   BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS.Early[order(BXK0031_TN_TP_TSS$year_month),]
-##drop NAs
+##remove NA rows
 BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS.Early[!is.na(BXK0031_TN_TP_TSS.Early$MonitoringStation),]
+  
+# BXK0031_TN_TP_TSS.Late <- BXK0031_TN_TP_TSS %>%
+#   filter(SampleDate > as.Date("2013-12-31"))
 
 ############################################################################
-  
-BXK0031_TN_TP_TSS.Late <- BXK0031_TN_TP_TSS %>%
-  filter(SampleDate > as.Date("2013-12-31"))
 
 CCM0069_TN_TP_TSS.Complete <- CCM0069_TN_TP_TSS %>%
   drop_na(TN, TP, TSS)
