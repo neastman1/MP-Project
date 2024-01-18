@@ -33,7 +33,7 @@ theme_set(mytheme)
 
 ```
 
-## Decomposing datasets for time series
+## BXK0031
 ```{r}
 # Create a time series object
 BXK0031_TN.Early.ts <- ts(BXK0031_TN_TP_TSS.Early$meanTN, start = c(2003,3), frequency =12)
@@ -69,27 +69,8 @@ BXK0031_TN_plot <- ggplot(BXK0031_TN_TP_TSS.Early, aes(x=year_month, y=meanTN)) 
 BXK0031_TN_plot
 
 #Running Seasonal MK
-BXK0031.Early.SMK <- SeasonalMannKendall(BXK0031_TN.Early.ts)
-summary(BXK0031.Early.SMK)
-
-```
-
-##Visualizing data
-```{r}
-##BXK0031 (early only)
-#Visualize Trend ## what does this mean??
-plot(BXK0031_TN.Early.ts)
-lines(lowess(time(BXK0031_TN.Early.ts), BXK0031_TN.Early.ts), col= 'blue')
-
-##with ggplot
-BXK0031_TN_plot <- ggplot(BXK0031_TN_TP_TSS.Early, aes(x=year_month, y=meanTN)) +
-  geom_line() +
-  geom_smooth(method="loess", se=F) +
-  xlab("Year") +
-  ylab("Total Nitrogen (mg)")
-BXK0031_TN_plot
-
-f
+# BXK0031.Early.SMK <- SeasonalMannKendall(BXK0031_TN.Early.ts)
+# summary(BXK0031.Early.SMK)
 
 ```
 
