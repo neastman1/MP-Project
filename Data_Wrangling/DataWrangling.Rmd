@@ -9,10 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 install.packages("plyr")
 install.packages("lubridate")
+library(lubridate)
 library("plyr")
 library("dplyr")
 library(tidyverse)
 library(tidyr)
+library(zoo)
 
 ```
 
@@ -46,6 +48,54 @@ class(TN.TP.TSS.Data.Final)
 write.csv(TN.TP.TSS.Data.Final, row.names = FALSE, file = "../Data/Processed/TN_TP_TSS_Data_Final.csv")
 ```
 
+```{r}
+TN.TP.TSS.Data.Final <- read.csv("../Data/Processed/TN_TP_TSS_Data_Final.csv")
+
+##making year, month, and day columns
+TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Final %>%
+  separate(SampleDate, c("year", "month", "day"))
+
+##fixing short year format
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="13"] <- "2013"
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="14"] <- "2014"
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="15"] <- "2015"
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="16"] <- "2016"
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="17"] <- "2017"
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="18"] <- "2018"
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="19"] <- "2019"
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="20"] <- "2020"
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="21"] <- "2021"
+TN.TP.TSS.Data.Final$year[TN.TP.TSS.Data.Final$year=="22"] <- "2022"
+
+##recombining date column
+TN.TP.TSS.Data.Final$SampleDate <- paste(TN.TP.TSS.Data.Final$year, TN.TP.TSS.Data.Final$month, TN.TP.TSS.Data.Final$day, sep='-')
+
+TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Final %>%
+  relocate(SampleDate, .after=day)
+
+##converting to date
+TN.TP.TSS.Data.Final$SampleDate <- as.Date(TN.TP.TSS.Data.Final$SampleDate, format="%Y-%m-%d")
+
+##creating month_year column
+TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Final %>%
+  mutate(year_month = as.yearmon(SampleDate))
+
+TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Final %>%
+  relocate(year_month, .after=SampleDate)
+
+##grouping by site and year_month
+TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Final %>%
+  group_by(MonitoringStation, Latitude, Longitude, year_month) %>%
+  summarize(meanTN = mean(TN),
+            meanTP = mean(TP),
+            meanTSS = mean(TSS))
+
+##change yearmon object to date object
+TN.TP.TSS.Data.Final$year_month <- as.Date(TN.TP.TSS.Data.Final$year_month, format = "%Y-%m-%d")
+class(TN.TP.TSS.Data.Final$year_month)
+
+```
+
 ## Separate by station for time series
 ```{r}
 BXK0031_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "BXK0031")
@@ -71,7 +121,8 @@ XCI4078_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "XCI4078"
 XDJ9007_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "XDJ9007")
 ```
 
-## Exploratory Analysis
+## Exploratory Analysis 
+## (note: changed SampleDate to year_month and TN to meanTN)
 ```{r}
 list.dfs <- list(BXK0031_TN_TP_TSS,CCM0069_TN_TP_TSS,EE3.0_TN_TP_TSS,EE3.1_TN_TP_TSS,EE3.2_TN_TP_TSS,EE3.3_TN_TP_TSS,ET6.1_TN_TP_TSS,ET6.2_TN_TP_TSS,ET7.1_TN_TP_TSS,ET8.1_TN_TP_TSS,ET9.1_TN_TP_TSS,ET10.1_TN_TP_TSS,MNK0146_TN_TP_TSS,POK0087_TN_TP_TSS,TRQ0088_TN_TP_TSS,TRQ0146_TN_TP_TSS,WIW0141_TN_TP_TSS,XAK7810_TN_TP_TSS,XCI4078_TN_TP_TSS,XDJ9007_TN_TP_TSS)
 
@@ -80,7 +131,7 @@ plot.chrs <- function(list.dfs) {
   plot.list <- vector(mode = 'list', length = length(list.dfs))
   
   for (i in 1:length(list.dfs)) {
-    plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=SampleDate, y=TN)) +
+    plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=year_month, y=meanTN)) +
                       geom_line() +
                       ggtitle(list.dfs[[i]]$MonitoringStation)
     names(plot.list)[i] <- paste0(list.dfs[[i]]$MonitoringStation)
@@ -89,10 +140,10 @@ plot.chrs <- function(list.dfs) {
 }
 plot.chrs(list.dfs)
 
-ET6.1 <- ggplot(ET6.1_TN_TP_TSS, aes(x=SampleDate, y=TN)) + geom_line() + scale_x_date(date_labels = "%Y-%m-%d")
+ET6.1 <- ggplot(ET6.1_TN_TP_TSS, aes(x=year_month, y=meanTN)) + geom_line() #+ scale_x_date(date_labels = "%Y-%m-%d")
 ET6.1
 
-WIW0141 <- ggplot(WIW0141_TN_TP_TSS, aes(x=SampleDate, y=TN)) + geom_line()
+WIW0141 <- ggplot(WIW0141_TN_TP_TSS, aes(x=year_month, y=meanTN)) + geom_line()
 WIW0141
 
 ```
@@ -101,9 +152,16 @@ WIW0141
 ```{r}
 BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
   filter(SampleDate < as.Date("2013-12-31"))
+##change formatting
+BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
+  filter(year_month <= as.Date("2013-12-01"))
+##ordering dataframe
+  BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS.Early[order(BXK0031_TN_TP_TSS$year_month),]
+##drop NAs
+BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS.Early[!is.na(BXK0031_TN_TP_TSS.Early$MonitoringStation),]
 
-  BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS.Early[order(BXK0031_TN_TP_TSS$SampleDate),]
-
+############################################################################
+  
 BXK0031_TN_TP_TSS.Late <- BXK0031_TN_TP_TSS %>%
   filter(SampleDate > as.Date("2013-12-31"))
 
