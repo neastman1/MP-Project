@@ -140,12 +140,6 @@ plot.chrs <- function(list.dfs) {
 }
 plot.chrs(list.dfs)
 
-ET6.1 <- ggplot(ET6.1_TN_TP_TSS, aes(x=year_month, y=meanTN)) + geom_line() #+ scale_x_date(date_labels = "%Y-%m-%d")
-ET6.1
-
-WIW0141 <- ggplot(WIW0141_TN_TP_TSS, aes(x=year_month, y=meanTN)) + geom_line()
-WIW0141
-
 ```
 
 ## Removing data gaps
@@ -154,86 +148,127 @@ WIW0141
 #   filter(SampleDate < as.Date("2013-12-31"))
 
 ##change formatting
-BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
+BXK0031_TN_TP_TSS.Complete <- BXK0031_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 ##ordering dataframe
-  BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS.Early[order(BXK0031_TN_TP_TSS.Early$year_month),]
+  BXK0031_TN_TP_TSS.Complete <- BXK0031_TN_TP_TSS.Complete[order(BXK0031_TN_TP_TSS.Complete$year_month),]
 ##remove NA rows
-BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS.Early[!is.na(BXK0031_TN_TP_TSS.Early$MonitoringStation),]
+BXK0031_TN_TP_TSS.Complete <- BXK0031_TN_TP_TSS.Complete[!is.na(BXK0031_TN_TP_TSS.Complete$MonitoringStation),]
+# Missing first 2 months (Jan, Feb)
 
 CCM0069_TN_TP_TSS.Complete <- CCM0069_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 CCM0069_TN_TP_TSS.Complete <- CCM0069_TN_TP_TSS.Complete[order(CCM0069_TN_TP_TSS.Complete$year_month),]
 CCM0069_TN_TP_TSS.Complete <- CCM0069_TN_TP_TSS.Complete[!is.na(CCM0069_TN_TP_TSS.Complete$MonitoringStation),]
   nrow(CCM0069_TN_TP_TSS.Complete)
+# Missing first 2 months (Jan, Feb)
   
-  ############################################################################
-
 EE3.0_TN_TP_TSS.Complete <- EE3.0_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-12-01"))
+EE3.0_TN_TP_TSS.Complete <- EE3.0_TN_TP_TSS.Complete[order(EE3.0_TN_TP_TSS.Complete$year_month),]
+EE3.0_TN_TP_TSS.Complete <- EE3.0_TN_TP_TSS.Complete[!is.na(EE3.0_TN_TP_TSS.Complete$MonitoringStation),]
+## Missing 23 months
 
 EE3.1_TN_TP_TSS.Complete <- EE3.1_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-12-01"))
+EE3.1_TN_TP_TSS.Complete <- EE3.1_TN_TP_TSS.Complete[order(EE3.1_TN_TP_TSS.Complete$year_month),]
+EE3.1_TN_TP_TSS.Complete <- EE3.1_TN_TP_TSS.Complete[!is.na(EE3.1_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 20 months
 
 EE3.2_TN_TP_TSS.Complete <- EE3.2_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-12-01"))
+EE3.2_TN_TP_TSS.Complete <- EE3.2_TN_TP_TSS.Complete[order(EE3.2_TN_TP_TSS.Complete$year_month),]
+EE3.2_TN_TP_TSS.Complete <- EE3.2_TN_TP_TSS.Complete[!is.na(EE3.2_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 35 months
 
 EE3.3_TN_TP_TSS.Complete <- EE3.3_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-12-01"))
+EE3.3_TN_TP_TSS.Complete <- EE3.3_TN_TP_TSS.Complete[order(EE3.3_TN_TP_TSS.Complete$year_month),]
+EE3.3_TN_TP_TSS.Complete <- EE3.3_TN_TP_TSS.Complete[!is.na(EE3.3_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 73 months
 
-#ET6.1 we need help
+ET6.1_TN_TP_TSS.Complete <- ET6.1_TN_TP_TSS %>%
+  filter(year_month <= as.Date("2022-12-01"))
+ET6.1_TN_TP_TSS.Complete <- ET6.1_TN_TP_TSS.Complete[order(ET6.1_TN_TP_TSS.Complete$year_month),]
+ET6.1_TN_TP_TSS.Complete <- ET6.1_TN_TP_TSS.Complete[!is.na(ET6.1_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 4 months
 
 ET6.2_TN_TP_TSS.Complete <- ET6.2_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-12-01"))
+ET6.2_TN_TP_TSS.Complete <- ET6.2_TN_TP_TSS.Complete[order(ET6.2_TN_TP_TSS.Complete$year_month),]
+ET6.2_TN_TP_TSS.Complete <- ET6.2_TN_TP_TSS.Complete[!is.na(ET6.2_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 24 months
 
 ET7.1_TN_TP_TSS.Complete <- ET7.1_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-12-01"))
+ET7.1_TN_TP_TSS.Complete <- ET7.1_TN_TP_TSS.Complete[order(ET7.1_TN_TP_TSS.Complete$year_month),]
+ET7.1_TN_TP_TSS.Complete <- ET7.1_TN_TP_TSS.Complete[!is.na(ET7.1_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 12 months
 
 ET8.1_TN_TP_TSS.Complete <- ET8.1_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-12-01"))
+ET8.1_TN_TP_TSS.Complete <- ET8.1_TN_TP_TSS.Complete[order(ET8.1_TN_TP_TSS.Complete$year_month),]
+ET8.1_TN_TP_TSS.Complete <- ET8.1_TN_TP_TSS.Complete[!is.na(ET8.1_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 24 months
 
 ET9.1_TN_TP_TSS.Complete <- ET9.1_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-12-01"))
+ET9.1_TN_TP_TSS.Complete <- ET9.1_TN_TP_TSS.Complete[order(ET9.1_TN_TP_TSS.Complete$year_month),]
+ET9.1_TN_TP_TSS.Complete <- ET9.1_TN_TP_TSS.Complete[!is.na(ET9.1_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 18 months
 
 ET10.1_TN_TP_TSS.Complete <- ET10.1_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-12-01"))
+ET10.1_TN_TP_TSS.Complete <- ET10.1_TN_TP_TSS.Complete[order(ET10.1_TN_TP_TSS.Complete$year_month),]
+ET10.1_TN_TP_TSS.Complete <- ET10.1_TN_TP_TSS.Complete[!is.na(ET10.1_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 7 months
 
 MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
-MNK0146_TN_TP_TSS.Early <- MNK0146_TN_TP_TSS.Complete %>%
-  filter(SampleDate < as.Date("2013-12-31"))
+  filter(year_month <= as.Date("2013-12-01"))
+MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS.Complete[order(MNK0146_TN_TP_TSS.Complete$year_month),]
+MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS.Complete[!is.na(MNK0146_TN_TP_TSS.Complete$MonitoringStation),]
+#Missing 33 months
 
 POK0087_TN_TP_TSS.Complete <- POK0087_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
-POK0087_TN_TP_TSS.Early <- POK0087_TN_TP_TSS.Complete %>%
-  filter(SampleDate < as.Date("2014-12-31"))
+  filter(year_month <= as.Date("2014-10-01"))
+POK0087_TN_TP_TSS.Complete <- POK0087_TN_TP_TSS.Complete[order(POK0087_TN_TP_TSS.Complete$year_month),]
+POK0087_TN_TP_TSS.Complete <- POK0087_TN_TP_TSS.Complete[!is.na(POK0087_TN_TP_TSS.Complete$MonitoringStation),]
+# Missing 7 months
 ### most stop after 2013-3 for TN, TP
 
 TRQ0088_TN_TP_TSS.Complete <- TRQ0088_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
-TRQ0088_TN_TP_TSS.Early <- TRQ0088_TN_TP_TSS.Complete %>%
-  filter(SampleDate < as.Date("2013-12-31"))
+  filter(year_month <= as.Date("2013-12-01"))
+TRQ0088_TN_TP_TSS.Complete <- TRQ0088_TN_TP_TSS.Complete[order(TRQ0088_TN_TP_TSS.Complete$year_month),]
+TRQ0088_TN_TP_TSS.Complete <- TRQ0088_TN_TP_TSS.Complete[!is.na(TRQ0088_TN_TP_TSS.Complete$MonitoringStation),]
+# Missing 2 months
 
 TRQ0146_TN_TP_TSS.Complete <- TRQ0146_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
-TRQ0146_TN_TP_TSS.Early <- TRQ0146_TN_TP_TSS.Complete %>%
-  filter(SampleDate < as.Date("2013-12-31"))
+  filter(year_month <= as.Date("2013-12-01"))
+TRQ0146_TN_TP_TSS.Complete <- TRQ0146_TN_TP_TSS.Complete[order(TRQ0146_TN_TP_TSS.Complete$year_month),]
+TRQ0146_TN_TP_TSS.Complete <- TRQ0146_TN_TP_TSS.Complete[!is.na(TRQ0146_TN_TP_TSS.Complete$MonitoringStation),]
+# Missing 2 Months
 
 WIW0141_TN_TP_TSS.Complete <- WIW0141_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
+  filter(year_month <= as.Date("2022-11-01"))
+WIW0141_TN_TP_TSS.Complete <- WIW0141_TN_TP_TSS.Complete[order(WIW0141_TN_TP_TSS.Complete$year_month),]
+WIW0141_TN_TP_TSS.Complete <- WIW0141_TN_TP_TSS.Complete[!is.na(WIW0141_TN_TP_TSS.Complete$MonitoringStation),]
+# Missing 15 months
 
 XAK7810_TN_TP_TSS.Complete <- XAK7810_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
-XAK7810_TN_TP_TSS.Early <- XAK7810_TN_TP_TSS.Complete %>%
-  filter(SampleDate < as.Date("2014-12-31"))
+ filter(year_month <= as.Date("2014-10-01"))
+XAK7810_TN_TP_TSS.Complete <- XAK7810_TN_TP_TSS.Complete[order(XAK7810_TN_TP_TSS.Complete$year_month),]
+XAK7810_TN_TP_TSS.Complete <- XAK7810_TN_TP_TSS.Complete[!is.na(XAK7810_TN_TP_TSS.Complete$MonitoringStation),]
+# Missing 27 months
 
 XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
-XCI4078_TN_TP_TSS.Early <- XCI4078_TN_TP_TSS.Complete %>%
-  filter(SampleDate < as.Date("2013-12-31"))
+  filter(year_month <= as.Date("2013-12-01"))
+XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS.Complete[order(XCI4078_TN_TP_TSS.Complete$year_month),]
+XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS.Complete[!is.na(XCI4078_TN_TP_TSS.Complete$MonitoringStation),]
+# Missing 6 months
 
 XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS %>%
-  drop_na(TN, TP, TSS)
-XDJ9007_TN_TP_TSS.Early <- XDJ9007_TN_TP_TSS.Complete %>%
-  filter(SampleDate < as.Date("2013-12-31"))
+  filter(year_month <= as.Date("2013-12-01"))
+XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete[order(XDJ9007_TN_TP_TSS.Complete$year_month),]
+XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete[!is.na(XDJ9007_TN_TP_TSS.Complete$MonitoringStation),]
+# Missing first 2 months (Jan, Feb)
 ```
