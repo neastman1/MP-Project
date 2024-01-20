@@ -144,9 +144,6 @@ plot.chrs(list.dfs)
 
 ## Removing data gaps
 ```{r}
-# BXK0031_TN_TP_TSS.Early <- BXK0031_TN_TP_TSS %>%
-#   filter(SampleDate < as.Date("2013-12-31"))
-
 ##change formatting
 BXK0031_TN_TP_TSS.Complete <- BXK0031_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
@@ -154,20 +151,17 @@ BXK0031_TN_TP_TSS.Complete <- BXK0031_TN_TP_TSS %>%
   BXK0031_TN_TP_TSS.Complete <- BXK0031_TN_TP_TSS.Complete[order(BXK0031_TN_TP_TSS.Complete$year_month),]
 ##remove NA rows
 BXK0031_TN_TP_TSS.Complete <- BXK0031_TN_TP_TSS.Complete[!is.na(BXK0031_TN_TP_TSS.Complete$MonitoringStation),]
-# Missing first 2 months (Jan, Feb)
 
 CCM0069_TN_TP_TSS.Complete <- CCM0069_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 CCM0069_TN_TP_TSS.Complete <- CCM0069_TN_TP_TSS.Complete[order(CCM0069_TN_TP_TSS.Complete$year_month),]
 CCM0069_TN_TP_TSS.Complete <- CCM0069_TN_TP_TSS.Complete[!is.na(CCM0069_TN_TP_TSS.Complete$MonitoringStation),]
   nrow(CCM0069_TN_TP_TSS.Complete)
-# Missing first 2 months (Jan, Feb)
   
 EE3.0_TN_TP_TSS.Complete <- EE3.0_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 EE3.0_TN_TP_TSS.Complete <- EE3.0_TN_TP_TSS.Complete[order(EE3.0_TN_TP_TSS.Complete$year_month),]
 EE3.0_TN_TP_TSS.Complete <- EE3.0_TN_TP_TSS.Complete[!is.na(EE3.0_TN_TP_TSS.Complete$MonitoringStation),]
-## Missing 23 months
 ##Creating sequence of dates
 EE3.0_yearmon <- as.data.frame(seq(from=as.Date("1986-01-01"), 
                                    to=as.Date("2022-12-01"),
@@ -187,7 +181,6 @@ EE3.1_TN_TP_TSS.Complete <- EE3.1_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 EE3.1_TN_TP_TSS.Complete <- EE3.1_TN_TP_TSS.Complete[order(EE3.1_TN_TP_TSS.Complete$year_month),]
 EE3.1_TN_TP_TSS.Complete <- EE3.1_TN_TP_TSS.Complete[!is.na(EE3.1_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 20 months
 ##Creating sequence of dates
 EE3.1_yearmon <- as.data.frame(seq(from=as.Date("1984-10-01"), 
                                    to=as.Date("2022-12-01"),
@@ -206,7 +199,6 @@ EE3.2_TN_TP_TSS.Complete <- EE3.2_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 EE3.2_TN_TP_TSS.Complete <- EE3.2_TN_TP_TSS.Complete[order(EE3.2_TN_TP_TSS.Complete$year_month),]
 EE3.2_TN_TP_TSS.Complete <- EE3.2_TN_TP_TSS.Complete[!is.na(EE3.2_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 35 months
 ##Creating sequence of dates
 EE3.2_yearmon <- as.data.frame(seq(from=as.Date("1986-03-01"), 
                                    to=as.Date("2022-12-01"),
@@ -225,7 +217,6 @@ EE3.3_TN_TP_TSS.Complete <- EE3.3_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 EE3.3_TN_TP_TSS.Complete <- EE3.3_TN_TP_TSS.Complete[order(EE3.3_TN_TP_TSS.Complete$year_month),]
 EE3.3_TN_TP_TSS.Complete <- EE3.3_TN_TP_TSS.Complete[!is.na(EE3.3_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 73 months
 ##Creating sequence of dates
 EE3.3_yearmon <- as.data.frame(seq(from=as.Date("1986-03-01"), 
                                    to=as.Date("2022-12-01"),
@@ -244,7 +235,6 @@ ET6.1_TN_TP_TSS.Complete <- ET6.1_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 ET6.1_TN_TP_TSS.Complete <- ET6.1_TN_TP_TSS.Complete[order(ET6.1_TN_TP_TSS.Complete$year_month),]
 ET6.1_TN_TP_TSS.Complete <- ET6.1_TN_TP_TSS.Complete[!is.na(ET6.1_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 4 months
 ##Creating sequence of dates
 ET6.1_yearmon <- as.data.frame(seq(from=as.Date("1986-01-01"), 
                                    to=as.Date("2022-12-01"),
@@ -263,7 +253,6 @@ ET6.2_TN_TP_TSS.Complete <- ET6.2_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 ET6.2_TN_TP_TSS.Complete <- ET6.2_TN_TP_TSS.Complete[order(ET6.2_TN_TP_TSS.Complete$year_month),]
 ET6.2_TN_TP_TSS.Complete <- ET6.2_TN_TP_TSS.Complete[!is.na(ET6.2_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 24 months
 ##Creating sequence of dates
 ET6.2_yearmon <- as.data.frame(seq(from=as.Date("1986-01-01"), 
                                    to=as.Date("2022-12-01"),
@@ -282,7 +271,6 @@ ET7.1_TN_TP_TSS.Complete <- ET7.1_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 ET7.1_TN_TP_TSS.Complete <- ET7.1_TN_TP_TSS.Complete[order(ET7.1_TN_TP_TSS.Complete$year_month),]
 ET7.1_TN_TP_TSS.Complete <- ET7.1_TN_TP_TSS.Complete[!is.na(ET7.1_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 12 months
 ##Creating sequence of dates
 ET7.1_yearmon <- as.data.frame(seq(from=as.Date("1986-01-01"), 
                                    to=as.Date("2022-12-01"),
@@ -301,7 +289,6 @@ ET8.1_TN_TP_TSS.Complete <- ET8.1_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 ET8.1_TN_TP_TSS.Complete <- ET8.1_TN_TP_TSS.Complete[order(ET8.1_TN_TP_TSS.Complete$year_month),]
 ET8.1_TN_TP_TSS.Complete <- ET8.1_TN_TP_TSS.Complete[!is.na(ET8.1_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 24 months
 ##Creating sequence of dates
 ET8.1_yearmon <- as.data.frame(seq(from=as.Date("1986-03-01"), 
                                    to=as.Date("2022-12-01"),
@@ -316,66 +303,145 @@ ET8.1_TN_TP_TSS.Merged <- ET8.1_TN_TP_TSS.Merged %>%
   relocate(year_month, .after=Longitude) %>%
   replace_na(list(MonitoringStation="ET8.1", Latitude=38.13794, Longitude=-75.81411))
 
-###############################################################################
-
 ET9.1_TN_TP_TSS.Complete <- ET9.1_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 ET9.1_TN_TP_TSS.Complete <- ET9.1_TN_TP_TSS.Complete[order(ET9.1_TN_TP_TSS.Complete$year_month),]
 ET9.1_TN_TP_TSS.Complete <- ET9.1_TN_TP_TSS.Complete[!is.na(ET9.1_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 18 months
+##Creating sequence of dates
+ET9.1_yearmon <- as.data.frame(seq(from=as.Date("1986-03-01"), 
+                                   to=as.Date("2022-12-01"),
+                                   by="1 month"))
+colnames(ET9.1_yearmon)[1] <- "year_month"
+nrow(ET9.1_yearmon)
+##Merging dataframes 
+ET9.1_TN_TP_TSS.Merged <- merge(ET9.1_TN_TP_TSS.Complete, ET9.1_yearmon, by="year_month", all=T)
+nrow(ET9.1_TN_TP_TSS.Merged)
+##Filling NAs for station, latitude, longitude
+ET9.1_TN_TP_TSS.Merged <- ET9.1_TN_TP_TSS.Merged %>%
+  relocate(year_month, .after=Longitude) %>%
+  replace_na(list(MonitoringStation="ET9.1", Latitude=38.055, Longitude=-75.80167))
 
 ET10.1_TN_TP_TSS.Complete <- ET10.1_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 ET10.1_TN_TP_TSS.Complete <- ET10.1_TN_TP_TSS.Complete[order(ET10.1_TN_TP_TSS.Complete$year_month),]
 ET10.1_TN_TP_TSS.Complete <- ET10.1_TN_TP_TSS.Complete[!is.na(ET10.1_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 7 months
+##Creating sequence of dates
+ET10.1_yearmon <- as.data.frame(seq(from=as.Date("1986-01-01"), 
+                                   to=as.Date("2022-12-01"),
+                                   by="1 month"))
+colnames(ET10.1_yearmon)[1] <- "year_month"
+nrow(ET10.1_yearmon)
+##Merging dataframes 
+ET10.1_TN_TP_TSS.Merged <- merge(ET10.1_TN_TP_TSS.Complete, ET10.1_yearmon, by="year_month", all=T)
+nrow(ET10.1_TN_TP_TSS.Merged)
+##Filling NAs for station, latitude, longitude
+ET10.1_TN_TP_TSS.Merged <- ET10.1_TN_TP_TSS.Merged %>%
+  relocate(year_month, .after=Longitude) %>%
+  replace_na(list(MonitoringStation="ET10.1", Latitude=38.07614, Longitude=-75.57125))
 
 MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS.Complete[order(MNK0146_TN_TP_TSS.Complete$year_month),]
 MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS.Complete[!is.na(MNK0146_TN_TP_TSS.Complete$MonitoringStation),]
-#Missing 33 months
+##Creating sequence of dates
+MNK0146_yearmon <- as.data.frame(seq(from=as.Date("2003-04-01"), 
+                                   to=as.Date("2013-12-01"),
+                                   by="1 month"))
+colnames(MNK0146_yearmon)[1] <- "year_month"
+nrow(MNK0146_yearmon)
+##Merging dataframes 
+MNK0146_TN_TP_TSS.Merged <- merge(MNK0146_TN_TP_TSS.Complete, MNK0146_yearmon, by="year_month", all=T)
+nrow(MNK0146_TN_TP_TSS.Merged)
+##Filling NAs for station, latitude, longitude
+MNK0146_TN_TP_TSS.Merged <- MNK0146_TN_TP_TSS.Merged %>%
+  relocate(year_month, .after=Longitude) %>%
+  replace_na(list(MonitoringStation="MNK0146", Latitude=38.175, Longitude=-75.72361))
 
 POK0087_TN_TP_TSS.Complete <- POK0087_TN_TP_TSS %>%
   filter(year_month <= as.Date("2014-10-01"))
 POK0087_TN_TP_TSS.Complete <- POK0087_TN_TP_TSS.Complete[order(POK0087_TN_TP_TSS.Complete$year_month),]
 POK0087_TN_TP_TSS.Complete <- POK0087_TN_TP_TSS.Complete[!is.na(POK0087_TN_TP_TSS.Complete$MonitoringStation),]
-# Missing 7 months
+##Creating sequence of dates
 ### most stop after 2013-3 for TN, TP
+POK0087_yearmon <- as.data.frame(seq(from=as.Date("2003-03-01"), 
+                                   to=as.Date("2014-10-01"),
+                                   by="1 month"))
+colnames(POK0087_yearmon)[1] <- "year_month"
+nrow(POK0087_yearmon)
+##Merging dataframes 
+POK0087_TN_TP_TSS.Merged <- merge(POK0087_TN_TP_TSS.Complete, POK0087_yearmon, by="year_month", all=T)
+nrow(POK0087_TN_TP_TSS.Merged)
+##Filling NAs for station, latitude, longitude
+POK0087_TN_TP_TSS.Merged <- POK0087_TN_TP_TSS.Merged %>%
+  relocate(year_month, .after=Longitude) %>%
+  replace_na(list(MonitoringStation="POK0087", Latitude=38.03972, Longitude=-75.66084))
 
 TRQ0088_TN_TP_TSS.Complete <- TRQ0088_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 TRQ0088_TN_TP_TSS.Complete <- TRQ0088_TN_TP_TSS.Complete[order(TRQ0088_TN_TP_TSS.Complete$year_month),]
 TRQ0088_TN_TP_TSS.Complete <- TRQ0088_TN_TP_TSS.Complete[!is.na(TRQ0088_TN_TP_TSS.Complete$MonitoringStation),]
-# Missing 2 months
 
 TRQ0146_TN_TP_TSS.Complete <- TRQ0146_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 TRQ0146_TN_TP_TSS.Complete <- TRQ0146_TN_TP_TSS.Complete[order(TRQ0146_TN_TP_TSS.Complete$year_month),]
 TRQ0146_TN_TP_TSS.Complete <- TRQ0146_TN_TP_TSS.Complete[!is.na(TRQ0146_TN_TP_TSS.Complete$MonitoringStation),]
-# Missing 2 Months
 
 WIW0141_TN_TP_TSS.Complete <- WIW0141_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-11-01"))
 WIW0141_TN_TP_TSS.Complete <- WIW0141_TN_TP_TSS.Complete[order(WIW0141_TN_TP_TSS.Complete$year_month),]
 WIW0141_TN_TP_TSS.Complete <- WIW0141_TN_TP_TSS.Complete[!is.na(WIW0141_TN_TP_TSS.Complete$MonitoringStation),]
-# Missing 15 months
+##Creating sequence of dates
+WIW0141_yearmon <- as.data.frame(seq(from=as.Date("2003-03-01"), 
+                                   to=as.Date("2022-11-01"),
+                                   by="1 month"))
+colnames(WIW0141_yearmon)[1] <- "year_month"
+nrow(WIW0141_yearmon)
+##Merging dataframes 
+WIW0141_TN_TP_TSS.Merged <- merge(WIW0141_TN_TP_TSS.Complete, WIW0141_yearmon, by="year_month", all=T)
+nrow(WIW0141_TN_TP_TSS.Merged)
+##Filling NAs for station, latitude, longitude
+WIW0141_TN_TP_TSS.Merged <- WIW0141_TN_TP_TSS.Merged %>%
+  relocate(year_month, .after=Longitude) %>%
+  replace_na(list(MonitoringStation="WIW0141", Latitude=38.34153, Longitude=-75.69569))
 
 XAK7810_TN_TP_TSS.Complete <- XAK7810_TN_TP_TSS %>%
  filter(year_month <= as.Date("2014-10-01"))
 XAK7810_TN_TP_TSS.Complete <- XAK7810_TN_TP_TSS.Complete[order(XAK7810_TN_TP_TSS.Complete$year_month),]
 XAK7810_TN_TP_TSS.Complete <- XAK7810_TN_TP_TSS.Complete[!is.na(XAK7810_TN_TP_TSS.Complete$MonitoringStation),]
-# Missing 27 months
+##Creating sequence of dates
+XAK7810_yearmon <- as.data.frame(seq(from=as.Date("2003-03-01"), 
+                                   to=as.Date("2014-10-01"),
+                                   by="1 month"))
+colnames(XAK7810_yearmon)[1] <- "year_month"
+nrow(XAK7810_yearmon)
+##Merging dataframes 
+XAK7810_TN_TP_TSS.Merged <- merge(XAK7810_TN_TP_TSS.Complete, XAK7810_yearmon, by="year_month", all=T)
+nrow(XAK7810_TN_TP_TSS.Merged)
+##Filling NAs for station, latitude, longitude
+XAK7810_TN_TP_TSS.Merged <- XAK7810_TN_TP_TSS.Merged %>%
+  relocate(year_month, .after=Longitude) %>%
+  replace_na(list(MonitoringStation="XAK7810", Latitude=37.96395, Longitude=-75.65047))
 
 XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS.Complete[order(XCI4078_TN_TP_TSS.Complete$year_month),]
 XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS.Complete[!is.na(XCI4078_TN_TP_TSS.Complete$MonitoringStation),]
-# Missing 6 months
+##Creating sequence of dates
+XCI4078_yearmon <- as.data.frame(seq(from=as.Date("2003-03-01"), 
+                                   to=as.Date("2013-12-01"),
+                                   by="1 month"))
+colnames(XCI4078_yearmon)[1] <- "year_month"
+nrow(XCI4078_yearmon)
+##Merging dataframes 
+XCI4078_TN_TP_TSS.Merged <- merge(XCI4078_TN_TP_TSS.Complete, XCI4078_yearmon, by="year_month", all=T)
+nrow(XCI4078_TN_TP_TSS.Merged)
+##Filling NAs for station, latitude, longitude
+XCI4078_TN_TP_TSS.Merged <- XCI4078_TN_TP_TSS.Merged %>%
+  relocate(year_month, .after=Longitude) %>%
+  replace_na(list(MonitoringStation="XCI4078", Latitude=38.23379, Longitude=-75.86963))
 
 XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete[order(XDJ9007_TN_TP_TSS.Complete$year_month),]
 XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete[!is.na(XDJ9007_TN_TP_TSS.Complete$MonitoringStation),]
-# Missing first 2 months (Jan, Feb)
 ```
