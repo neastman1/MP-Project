@@ -373,7 +373,15 @@ nrow(ET8.1_TN_TP_TSS.Merged)
 ET8.1_TN_TP_TSS.Merged <- ET8.1_TN_TP_TSS.Merged %>%
   relocate(year_month, .after=Longitude) %>%
   replace_na(list(MonitoringStation="ET8.1", Latitude=38.13794, Longitude=-75.81411))
+#Interpolate for NAs
+ET8.1_TN_TP_TSS.Merged <- ET8.1_TN_TP_TSS.Merged %>%
+  mutate(meanTN = zoo::na.approx(meanTN))
+ET8.1_TN_TP_TSS.Merged <- ET8.1_TN_TP_TSS.Merged %>%
+  mutate(meanTP = zoo::na.approx(meanTP))
+ET8.1_TN_TP_TSS.Merged <- ET8.1_TN_TP_TSS.Merged %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 
+# ET9.1
 ET9.1_TN_TP_TSS.Complete <- ET9.1_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 ET9.1_TN_TP_TSS.Complete <- ET9.1_TN_TP_TSS.Complete[order(ET9.1_TN_TP_TSS.Complete$year_month),]
@@ -391,7 +399,15 @@ nrow(ET9.1_TN_TP_TSS.Merged)
 ET9.1_TN_TP_TSS.Merged <- ET9.1_TN_TP_TSS.Merged %>%
   relocate(year_month, .after=Longitude) %>%
   replace_na(list(MonitoringStation="ET9.1", Latitude=38.055, Longitude=-75.80167))
+##Interpolate for NAs
+ET9.1_TN_TP_TSS.Merged <- ET9.1_TN_TP_TSS.Merged %>%
+  mutate(meanTN = zoo::na.approx(meanTN))
+ET9.1_TN_TP_TSS.Merged <- ET9.1_TN_TP_TSS.Merged %>%
+  mutate(meanTP = zoo::na.approx(meanTP))
+ET9.1_TN_TP_TSS.Merged <- ET9.1_TN_TP_TSS.Merged %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 
+#ET10.1
 ET10.1_TN_TP_TSS.Complete <- ET10.1_TN_TP_TSS %>%
   filter(year_month <= as.Date("2022-12-01"))
 ET10.1_TN_TP_TSS.Complete <- ET10.1_TN_TP_TSS.Complete[order(ET10.1_TN_TP_TSS.Complete$year_month),]
@@ -409,7 +425,15 @@ nrow(ET10.1_TN_TP_TSS.Merged)
 ET10.1_TN_TP_TSS.Merged <- ET10.1_TN_TP_TSS.Merged %>%
   relocate(year_month, .after=Longitude) %>%
   replace_na(list(MonitoringStation="ET10.1", Latitude=38.07614, Longitude=-75.57125))
+##Interpolate for NAs
+ET10.1_TN_TP_TSS.Merged <- ET10.1_TN_TP_TSS.Merged %>%
+  mutate(meanTN = zoo::na.approx(meanTN))
+ET10.1_TN_TP_TSS.Merged <- ET10.1_TN_TP_TSS.Merged %>%
+  mutate(meanTP = zoo::na.approx(meanTP))
+ET10.1_TN_TP_TSS.Merged <- ET10.1_TN_TP_TSS.Merged %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 
+#MNK0146
 MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 MNK0146_TN_TP_TSS.Complete <- MNK0146_TN_TP_TSS.Complete[order(MNK0146_TN_TP_TSS.Complete$year_month),]
@@ -427,7 +451,15 @@ nrow(MNK0146_TN_TP_TSS.Merged)
 MNK0146_TN_TP_TSS.Merged <- MNK0146_TN_TP_TSS.Merged %>%
   relocate(year_month, .after=Longitude) %>%
   replace_na(list(MonitoringStation="MNK0146", Latitude=38.175, Longitude=-75.72361))
+##Interpolate for NAs
+MNK0146_TN_TP_TSS.Merged <- MNK0146_TN_TP_TSS.Merged %>%
+  mutate(meanTN = zoo::na.approx(meanTN))
+MNK0146_TN_TP_TSS.Merged <- MNK0146_TN_TP_TSS.Merged %>%
+  mutate(meanTP = zoo::na.approx(meanTP))
+MNK0146_TN_TP_TSS.Merged <- MNK0146_TN_TP_TSS.Merged %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 
+#POK0087
 POK0087_TN_TP_TSS.Complete <- POK0087_TN_TP_TSS %>%
   filter(year_month <= as.Date("2014-10-01"))
 POK0087_TN_TP_TSS.Complete <- POK0087_TN_TP_TSS.Complete[order(POK0087_TN_TP_TSS.Complete$year_month),]
