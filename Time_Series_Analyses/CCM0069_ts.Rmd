@@ -1,0 +1,110 @@
+---
+title: "TimeSeries"
+author: "Nicole"
+date: "2023-11-07"
+output: html_document
+---
+## Objectives
+1. Identify nutrient trends over time for each monitoring station
+2. Compare to the TSS
+
+## Set up
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("tidyverse")
+library(tidyverse)
+#install.packages("trend")
+library(trend)
+#install.packages("zoo")
+library(zoo)
+#install.packages("Kendall")
+library(Kendall)
+#install.packages("tseries")
+library(tseries)
+
+
+#Set Theme
+mytheme <- theme_classic(base_size = 14) + theme(axis.text = element_text(color = "black"), legend.position = "top")
+theme_set(mytheme)
+```
+
+## Import Datasets
+```{r}
+
+```
+
+## TN
+```{r}
+# Create a time series object
+CCM0069_TN.ts <- ts(CCM0069_TN_TP_TSS.Complete$meanTN, start = c(2003,3), frequency =12)
+
+# Generate the decomposition
+CCM0069_TN.Decomposed <- stl(CCM0069_TN.ts, s.window = "periodic")
+
+# Visualize the decomposed series
+plot(CCM0069_TN.Decomposed)
+
+# Running Mann-Kendall Test
+CCM0069.MK.TN <- MannKendall(CCM0069_TN.ts)
+CCM0069.MK.TN
+summary(CCM0069.MK.TN)
+
+## Visualize with ggplot
+CCM0069_TN_plot <- ggplot(CCM0069_TN_TP_TSS.Complete, aes(x=year_month, y=meanTN)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Nitrogen (mg)")
+CCM0069_TN_plot
+
+```
+
+#TP
+```{r}
+# Create a time series object
+CCM0069_TP.ts <- ts(CCM0069_TN_TP_TSS.Complete$meanTP, start = c(2003,3), frequency =12)
+
+# Generate the decomposition
+CCM0069_TP.Decomposed <- stl(CCM0069_TP.ts, s.window = "periodic")
+
+#Visualize the decomposed series
+plot(CCM0069_TP.Decomposed)
+
+#Running Mann-Kendall Test
+CCM0069.MK.TP <- MannKendall(CCM0069_TP.ts)
+CCM0069.MK.TP
+summary(CCM0069.MK.TP)
+
+# Visualize with ggplot
+CCM0069_TP_plot <- ggplot(CCM0069_TN_TP_TSS.Complete, aes(x=year_month, y=meanTP)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Phosphorus (mg)")
+CCM0069_TP_plot
+```
+
+#TSS
+```{r}
+# Create a time series object
+CCM0069_TSS.ts <- ts(CCM0069_TN_TP_TSS.Complete$meanTSS, start = c(2003,3), frequency =12)
+
+# Generate the decomposition
+CCM0069_TSS.Decomposed <- stl(CCM0069_TSS.ts, s.window = "periodic")
+
+#Visualize the decomposed series
+plot(CCM0069_TSS.Decomposed)
+
+#Running Mann-Kendall Test
+CCM0069.MK.TSS <- MannKendall(CCM0069_TSS.ts)
+CCM0069.MK.TSS
+summary(CCM0069.MK.TSS)
+
+##Visualize with ggplot
+CCM0069_TSS_plot <- ggplot(CCM0069_TN_TP_TSS.Complete, aes(x=year_month, y=meanTSS)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Suspended Solids (mg)")
+CCM0069_TSS_plot
+```

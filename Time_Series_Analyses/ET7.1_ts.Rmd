@@ -1,0 +1,110 @@
+---
+title: "TimeSeries"
+author: "Nicole"
+date: "2023-11-07"
+output: html_document
+---
+## Objectives
+1. Identify nutrient trends over time for each monitoring station
+2. Compare to the TSS
+
+## Set up
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("tidyverse")
+library(tidyverse)
+#install.packages("trend")
+library(trend)
+#install.packages("zoo")
+library(zoo)
+#install.packages("Kendall")
+library(Kendall)
+#install.packages("tseries")
+library(tseries)
+
+
+#Set Theme
+mytheme <- theme_classic(base_size = 14) + theme(axis.text = element_text(color = "black"), legend.position = "top")
+theme_set(mytheme)
+```
+
+## Import Datasets
+```{r}
+
+```
+
+## TN
+```{r}
+# Create a time series object
+ET7.1_TN.ts <- ts(ET7.1_TN_TP_TSS.Merged$meanTN, start = c(1986,1), frequency =12)
+
+# Generate the decomposition
+ET7.1_TN.Decomposed <- stl(ET7.1_TN.ts, s.window = "periodic")
+
+#Visualize the decomposed series
+plot(ET7.1_TN.Decomposed)
+
+#Running Mann-Kendall Test
+ET7.1.MK.TN <- MannKendall(ET7.1_TN.ts)
+ET7.1.MK.TN
+summary(ET7.1.MK.TN)
+
+##Visualize with ggplot
+ET7.1_TN_plot <- ggplot(ET7.1_TN_TP_TSS.Merged, aes(x=year_month, y=meanTN)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Nitrogen (mg)")
+ET7.1_TN_plot
+
+```
+
+#TP
+```{r}
+# Create a time series object
+ET7.1_TP.ts <- ts(ET7.1_TN_TP_TSS.Merged$meanTP, start = c(1986,1), frequency =12)
+
+# Generate the decomposition
+ET7.1_TP.Decomposed <- stl(ET7.1_TP.ts, s.window = "periodic")
+
+#Visualize the decomposed series
+plot(ET7.1_TP.Decomposed)
+
+#Running Mann-Kendall Test
+ET7.1.MK.TP <- MannKendall(ET7.1_TP.ts)
+ET7.1.MK.TP
+summary(ET7.1.MK.TP)
+
+##with ggplot
+ET7.1_TP_plot <- ggplot(ET7.1_TN_TP_TSS.Merged, aes(x=year_month, y=meanTP)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Phosphorus (mg)")
+ET7.1_TP_plot
+```
+
+#TSS
+```{r}
+# Create a time series object
+ET7.1_TSS.ts <- ts(ET7.1_TN_TP_TSS.Merged$meanTSS, start = c(1986,1), frequency =12)
+
+# Generate the decomposition
+ET7.1_TSS.Decomposed <- stl(ET7.1_TSS.ts, s.window = "periodic")
+
+#Visualize the decomposed series
+plot(ET7.1_TSS.Decomposed)
+
+#Running Mann-Kendall Test
+ET7.1.MK.TSS <- MannKendall(ET7.1_TSS.ts)
+ET7.1.MK.TSS
+summary(ET7.1.MK.TSS)
+
+##with ggplot
+ET7.1_TSS_plot <- ggplot(ET7.1_TN_TP_TSS.Merged, aes(x=year_month, y=meanTSS)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Suspended Solids (mg)")
+ET7.1_TSS_plot
+```

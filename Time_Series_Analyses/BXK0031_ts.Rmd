@@ -33,35 +33,34 @@ theme_set(mytheme)
 
 ```
 
-## BXK0031
+## TN
 ```{r}
 # Create a time series object
-BXK0031_TN.Early.ts <- ts(BXK0031_TN_TP_TSS.Early$meanTN, start = c(2003,3), frequency =12)
+BXK0031_TN.ts <- ts(BXK0031_TN_TP_TSS.Complete$meanTN, start = c(2003,3), frequency =12)
 
 #BXK0031_TN.Late.ts <- ts(BXK0031_TN_TP_TSS.Late$TN, start = c(2020,1), end = c(2022, 12), frequency =12)
 
 # Generate the decomposition
-BXK0031_TN.Early.Decomposed <- stl(BXK0031_TN.Early.ts, s.window = "periodic")
+BXK0031_TN.Decomposed <- stl(BXK0031_TN.ts, s.window = "periodic")
 
-BXK0031_TN.Late.Decomposed <- stl(BXK0031_TN.Late.ts, s.window = "periodic")
+#BXK0031_TN.Late.Decomposed <- stl(BXK0031_TN.Late.ts, s.window = "periodic")
 
 #Visualize the decomposed series
-plot(BXK0031_TN.Early.Decomposed)
+plot(BXK0031_TN.Decomposed)
 
-plot(BXK0031_TN.Late.Decomposed)
+#plot(BXK0031_TN.Late.Decomposed)
 
 #Running Mann-Kendall Test
-##should ask Luana about how to interpret the stats of this test!!
-BXK0031.Early.MK <- MannKendall(BXK0031_TN.Early.ts)
-BXK0031.Early.MK
-summary(BXK0031.Early.MK)
+BXK0031.MK.TN <- MannKendall(BXK0031_TN.ts)
+BXK0031.MK.TN
+summary(BXK0031.MK.TN)
 
 #Visualize Trend ## what does this mean??
-plot(BXK0031_TN.Early.ts)
-lines(lowess(time(BXK0031_TN.Early.ts), BXK0031_TN.Early.ts), col= 'blue')
+plot(BXK0031_TN.ts)
+lines(lowess(time(BXK0031_TN.ts), BXK0031_TN.ts), col= 'blue')
 
-##with ggplot
-BXK0031_TN_plot <- ggplot(BXK0031_TN_TP_TSS.Early, aes(x=year_month, y=meanTN)) +
+## Visualize with ggplot
+BXK0031_TN_plot <- ggplot(BXK0031_TN_TP_TSS.Complete, aes(x=year_month, y=meanTN)) +
   geom_line() +
   geom_smooth(method="loess", se=F) +
   xlab("Year") +
@@ -74,3 +73,52 @@ BXK0031_TN_plot
 
 ```
 
+#TP
+```{r}
+# Create a time series object
+BXK0031_TP.ts <- ts(BXK0031_TN_TP_TSS.Complete$meanTP, start = c(2003,3), frequency =12)
+
+# Generate the decomposition
+BXK0031_TP.Decomposed <- stl(BXK0031_TP.ts, s.window = "periodic")
+
+#Visualize the decomposed series
+plot(BXK0031_TP.Decomposed)
+
+#Running Mann-Kendall Test
+BXK0031.MK.TP <- MannKendall(BXK0031_TP.ts)
+BXK0031.MK.TP
+summary(BXK0031.MK.TP)
+
+##Visualize with ggplot
+BXK0031_TP_plot <- ggplot(BXK0031_TN_TP_TSS.Complete, aes(x=year_month, y=meanTP)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Phosphorus (mg)")
+BXK0031_TP_plot
+```
+
+#TSS
+```{r}
+# Create a time series object
+BXK0031_TSS.ts <- ts(BXK0031_TN_TP_TSS.Complete$meanTSS, start = c(2003,3), frequency =12)
+
+# Generate the decomposition
+BXK0031_TSS.Decomposed <- stl(BXK0031_TSS.ts, s.window = "periodic")
+
+# Visualize the decomposed series
+plot(BXK0031_TSS.Decomposed)
+
+#Running Mann-Kendall Test
+BXK0031.MK.TSS <- MannKendall(BXK0031_TSS.ts)
+BXK0031.MK.TSS
+summary(BXK0031.MK.TSS)
+
+##Visualize with ggplot
+BXK0031_TSS_plot <- ggplot(BXK0031_TN_TP_TSS.Complete, aes(x=year_month, y=meanTSS)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Suspended Solids (mg)")
+BXK0031_TSS_plot
+```
