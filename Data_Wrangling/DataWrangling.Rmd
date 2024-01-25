@@ -127,7 +127,7 @@ XDJ9007_TN_TP_TSS <- filter(TN.TP.TSS.Data.Final, MonitoringStation == "XDJ9007"
 list.dfs <- list(BXK0031_TN_TP_TSS,CCM0069_TN_TP_TSS,EE3.0_TN_TP_TSS,EE3.1_TN_TP_TSS,EE3.2_TN_TP_TSS,EE3.3_TN_TP_TSS,ET6.1_TN_TP_TSS,ET6.2_TN_TP_TSS,ET7.1_TN_TP_TSS,ET8.1_TN_TP_TSS,ET9.1_TN_TP_TSS,ET10.1_TN_TP_TSS,MNK0146_TN_TP_TSS,POK0087_TN_TP_TSS,TRQ0088_TN_TP_TSS,TRQ0146_TN_TP_TSS,WIW0141_TN_TP_TSS,XAK7810_TN_TP_TSS,XCI4078_TN_TP_TSS,XDJ9007_TN_TP_TSS)
 
 # Representing trends in TN over time at each site
-plot.chrs <- function(list.dfs) { 
+plot.TN.chrs <- function(list.dfs) { 
   plot.list <- vector(mode = 'list', length = length(list.dfs))
   
   for (i in 1:length(list.dfs)) {
@@ -138,17 +138,39 @@ plot.chrs <- function(list.dfs) {
   }
   return(plot.list)
 }
-plot.chrs(list.dfs)
+plot.TN.chrs(list.dfs)
 
 ```
 ## Exploratory Analysis for TP
 ```{r}
-
+plot.TP.chrs <- function(list.dfs) { 
+  plot.list <- vector(mode = 'list', length = length(list.dfs))
+  
+  for (i in 1:length(list.dfs)) {
+    plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=year_month, y=meanTP)) +
+                      geom_line() +
+                      ggtitle(list.dfs[[i]]$MonitoringStation)
+    names(plot.list)[i] <- paste0(list.dfs[[i]]$MonitoringStation)
+  }
+  return(plot.list)
+}
+plot.TP.chrs(list.dfs)
 ```
 
 ## Exploratory Analysis for TSS
 ```{r}
-
+plot.TSS.chrs <- function(list.dfs) { 
+  plot.list <- vector(mode = 'list', length = length(list.dfs))
+  
+  for (i in 1:length(list.dfs)) {
+    plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=year_month, y=meanTSS)) +
+                      geom_line() +
+                      ggtitle(list.dfs[[i]]$MonitoringStation)
+    names(plot.list)[i] <- paste0(list.dfs[[i]]$MonitoringStation)
+  }
+  return(plot.list)
+}
+plot.TSS.chrs(list.dfs)
 ```
 
 ## Removing data gaps
@@ -478,7 +500,20 @@ nrow(POK0087_TN_TP_TSS.Merged)
 POK0087_TN_TP_TSS.Merged <- POK0087_TN_TP_TSS.Merged %>%
   relocate(year_month, .after=Longitude) %>%
   replace_na(list(MonitoringStation="POK0087", Latitude=38.03972, Longitude=-75.66084))
+##Making two datasets because of missing TN and TP data
+POKOO87_TN_TP.Merged <- POK0087_TN_TP_TSS.Merged %>%
+  select(MonitoringStation, Latitude, Longitude, year_month, meanTN, meanTP)
+POK0087_TN_TP.Merged <- POK0087_TN_TP_TSS %>%
+  filter(year_month <= as.Date("2012-03-01"))
+##Interpolate for NAs
+POK0087_TN_TP.Merged <- POK0087_TN_TP.Merged %>%
+  mutate(meanTN = zoo::na.approx(meanTN))
+POK0087_TN_TP.Merged <- POK0087_TN_TP.Merged %>%
+  mutate(meanTP = zoo::na.approx(meanTP))
+POK0087_TN_TP_TSS.Merged <- POK0087_TN_TP_TSS.Merged %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 
+#TRQ0088
 TRQ0088_TN_TP_TSS.Complete <- TRQ0088_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 TRQ0088_TN_TP_TSS.Complete <- TRQ0088_TN_TP_TSS.Complete[order(TRQ0088_TN_TP_TSS.Complete$year_month),]
@@ -524,6 +559,11 @@ nrow(XAK7810_TN_TP_TSS.Merged)
 XAK7810_TN_TP_TSS.Merged <- XAK7810_TN_TP_TSS.Merged %>%
   relocate(year_month, .after=Longitude) %>%
   replace_na(list(MonitoringStation="XAK7810", Latitude=37.96395, Longitude=-75.65047))
+#Separating TN and TP because they have large data gaps
+XAK7810_TN_TP.Merged <- XAK7810_TN_TP_TSS.Merged %>%
+  select(MonitoringStation, Latitude, Longitude, year_month, meanTN, meanTP)
+XAK7810_TN_TP.Merged <- XAK7810_TN_TP_TSS %>%
+  filter(year_month <= as.Date("2012-03-01"))
 
 XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
