@@ -555,7 +555,15 @@ nrow(WIW0141_TN_TP_TSS.Merged)
 WIW0141_TN_TP_TSS.Merged <- WIW0141_TN_TP_TSS.Merged %>%
   relocate(year_month, .after=Longitude) %>%
   replace_na(list(MonitoringStation="WIW0141", Latitude=38.34153, Longitude=-75.69569))
+##Interpolate for NAs
+WIW0141_TN_TP_TSS.Merged <- WIW0141_TN_TP_TSS.Merged %>%
+  mutate(meanTN = zoo::na.approx(meanTN))
+WIW0141_TN_TP_TSS.Merged <- WIW0141_TN_TP_TSS.Merged %>%
+  mutate(meanTP = zoo::na.approx(meanTP))
+WIW0141_TN_TP_TSS.Merged <- WIW0141_TN_TP_TSS.Merged %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 
+#XAK7810
 XAK7810_TN_TP_TSS.Complete <- XAK7810_TN_TP_TSS %>%
  filter(year_month <= as.Date("2014-10-01"))
 XAK7810_TN_TP_TSS.Complete <- XAK7810_TN_TP_TSS.Complete[order(XAK7810_TN_TP_TSS.Complete$year_month),]
@@ -578,7 +586,11 @@ XAK7810_TN_TP.Merged <- XAK7810_TN_TP_TSS.Merged %>%
   select(MonitoringStation, Latitude, Longitude, year_month, meanTN, meanTP)
 XAK7810_TN_TP.Merged <- XAK7810_TN_TP_TSS %>%
   filter(year_month <= as.Date("2012-03-01"))
+#Interpolate for NAs
+XAK7810_TN_TP_TSS.Merged <- XAK7810_TN_TP_TSS.Merged %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 
+#XCI4078
 XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 XCI4078_TN_TP_TSS.Complete <- XCI4078_TN_TP_TSS.Complete[order(XCI4078_TN_TP_TSS.Complete$year_month),]
@@ -596,7 +608,15 @@ nrow(XCI4078_TN_TP_TSS.Merged)
 XCI4078_TN_TP_TSS.Merged <- XCI4078_TN_TP_TSS.Merged %>%
   relocate(year_month, .after=Longitude) %>%
   replace_na(list(MonitoringStation="XCI4078", Latitude=38.23379, Longitude=-75.86963))
+##Interpolate for NAs
+XCI4078_TN_TP_TSS.Merged <- XCI4078_TN_TP_TSS.Merged %>%
+  mutate(meanTN = zoo::na.approx(meanTN))
+XCI4078_TN_TP_TSS.Merged <- XCI4078_TN_TP_TSS.Merged %>%
+  mutate(meanTP = zoo::na.approx(meanTP))
+XCI4078_TN_TP_TSS.Merged <- XCI4078_TN_TP_TSS.Merged %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 
+#XDJ9007
 XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete[order(XDJ9007_TN_TP_TSS.Complete$year_month),]
