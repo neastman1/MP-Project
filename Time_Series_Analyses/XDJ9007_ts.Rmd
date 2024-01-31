@@ -48,6 +48,9 @@ plot(XDJ9007_TN.Decomposed)
 XDJ9007.MK.TN <- MannKendall(XDJ9007_TN.ts)
 XDJ9007.MK.TN
 summary(XDJ9007.MK.TN)
+#Running SMK
+XDJ9007.SMK.TN <- SeasonalMannKendall(XDJ9007_TN.ts)
+summary(XDJ9007.SMK.TN)
 
 ## Visualize with ggplot
 XDJ9007_TN_plot <- ggplot(XDJ9007_TN_TP_TSS.Complete, aes(x=year_month, y=meanTN)) +
