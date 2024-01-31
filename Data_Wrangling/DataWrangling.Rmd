@@ -621,4 +621,11 @@ XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS %>%
   filter(year_month <= as.Date("2013-12-01"))
 XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete[order(XDJ9007_TN_TP_TSS.Complete$year_month),]
 XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete[!is.na(XDJ9007_TN_TP_TSS.Complete$MonitoringStation),]
+#Interpolate for NAs
+XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete %>%
+  mutate(meanTN = zoo::na.approx(meanTN))
+XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete %>%
+  mutate(meanTP = zoo::na.approx(meanTP))
+XDJ9007_TN_TP_TSS.Complete <- XDJ9007_TN_TP_TSS.Complete %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 ```

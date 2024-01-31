@@ -1,0 +1,110 @@
+---
+title: "TimeSeries"
+author: "Nicole"
+date: "2023-11-07"
+output: html_document
+---
+## Objectives
+1. Identify nutrient trends over time for each monitoring station
+2. Compare to the TSS
+
+## Set up
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("tidyverse")
+library(tidyverse)
+#install.packages("trend")
+library(trend)
+#install.packages("zoo")
+library(zoo)
+#install.packages("Kendall")
+library(Kendall)
+#install.packages("tseries")
+library(tseries)
+
+
+#Set Theme
+mytheme <- theme_classic(base_size = 14) + theme(axis.text = element_text(color = "black"), legend.position = "top")
+theme_set(mytheme)
+```
+
+## Import Datasets
+```{r}
+
+```
+
+## TN
+```{r}
+# Create a time series object
+XDJ9007_TN.ts <- ts(XDJ9007_TN_TP_TSS.Complete$meanTN, start = c(2003,3), frequency =12)
+
+# Generate the decomposition
+XDJ9007_TN.Decomposed <- stl(XDJ9007_TN.ts, s.window = "periodic")
+
+# Visualize the decomposed series
+plot(XDJ9007_TN.Decomposed)
+
+# Running Mann-Kendall Test
+XDJ9007.MK.TN <- MannKendall(XDJ9007_TN.ts)
+XDJ9007.MK.TN
+summary(XDJ9007.MK.TN)
+
+## Visualize with ggplot
+XDJ9007_TN_plot <- ggplot(XDJ9007_TN_TP_TSS.Complete, aes(x=year_month, y=meanTN)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Nitrogen (mg)")
+XDJ9007_TN_plot
+
+```
+
+#TP
+```{r}
+# Create a time series object
+XDJ9007_TP.ts <- ts(XDJ9007_TN_TP_TSS.Complete$meanTP, start = c(2003,3), frequency =12)
+
+# Generate the decomposition
+XDJ9007_TP.Decomposed <- stl(XDJ9007_TP.ts, s.window = "periodic")
+
+#Visualize the decomposed series
+plot(XDJ9007_TP.Decomposed)
+
+#Running Mann-Kendall Test
+XDJ9007.MK.TP <- MannKendall(XDJ9007_TP.ts)
+XDJ9007.MK.TP
+summary(XDJ9007.MK.TP)
+
+# Visualize with ggplot
+XDJ9007_TP_plot <- ggplot(XDJ9007_TN_TP_TSS.Complete, aes(x=year_month, y=meanTP)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Phosphorus (mg)")
+XDJ9007_TP_plot
+```
+
+#TSS
+```{r}
+# Create a time series object
+XDJ9007_TSS.ts <- ts(XDJ9007_TN_TP_TSS.Complete$meanTSS, start = c(2003,3), frequency =12)
+
+# Generate the decomposition
+XDJ9007_TSS.Decomposed <- stl(XDJ9007_TSS.ts, s.window = "periodic")
+
+#Visualize the decomposed series
+plot(XDJ9007_TSS.Decomposed)
+
+#Running Mann-Kendall Test
+XDJ9007.MK.TSS <- MannKendall(XDJ9007_TSS.ts)
+XDJ9007.MK.TSS
+summary(XDJ9007.MK.TSS)
+
+##Visualize with ggplot
+XDJ9007_TSS_plot <- ggplot(XDJ9007_TN_TP_TSS.Complete, aes(x=year_month, y=meanTSS)) +
+  geom_line() +
+  geom_smooth(method="loess", se=F) +
+  xlab("Year") +
+  ylab("Total Suspended Solids (mg)")
+XDJ9007_TSS_plot
+```
