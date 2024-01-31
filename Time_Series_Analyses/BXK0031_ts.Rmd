@@ -21,7 +21,8 @@ library(zoo)
 library(Kendall)
 #install.packages("tseries")
 library(tseries)
-
+#install.packages("corrplot")
+library(corrplot)
 
 #Set Theme
 mytheme <- theme_classic(base_size = 14) + theme(axis.text = element_text(color = "black"), legend.position = "top")
@@ -70,7 +71,6 @@ BXK0031_TN_plot
 #Running Seasonal MK
 # BXK0031.Early.SMK <- SeasonalMannKendall(BXK0031_TN.Early.ts)
 # summary(BXK0031.Early.SMK)
-
 ```
 
 #TP
@@ -121,4 +121,12 @@ BXK0031_TSS_plot <- ggplot(BXK0031_TN_TP_TSS.Complete, aes(x=year_month, y=meanT
   xlab("Year") +
   ylab("Total Suspended Solids (mg)")
 BXK0031_TSS_plot
+```
+
+```{r}
+#Correlation Plots
+BXK0031_CorrPrep <- BXK0031_TN_TP_TSS.Complete[,c(5:7)]
+testRes = cor.mtest(BXK0031_CorrPrep, conf.level = 0.95)
+BXK0031.Corr <- cor(BXK0031_CorrPrep) 
+corrplot(BXK0031.Corr, p.mat = testRes$p, method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
 ```
