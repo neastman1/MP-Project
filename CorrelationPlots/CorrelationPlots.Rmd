@@ -15,7 +15,7 @@ Corr.plots <- function(list.dfs.Corr) {
   Corr.list <- vector(mode = 'list', length = length(list.dfs.Corr))
   
   for (i in 1:length(list.dfs)) {
-    Corr.list[[i]] <- corrplot(cor(list.dfs.Corr[[i]][-list.dfs.Corr[[i]]=NA, c(5:7)]), method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
+    Corr.list[[i]] <- corrplot(cor(list.dfs.Corr[[i]][-list.dfs.Corr[[i]]$=NA, c(5:7)]), method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
 names(Corr.list)[i] <- paste0(list.dfs.Corr[[i]]$MonitoringStation)
     }
   return(Corr.list)
