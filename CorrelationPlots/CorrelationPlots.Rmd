@@ -2,7 +2,7 @@
 library(corrplot)
 
 #Correlation Plots
-BXK0031_CorrPrep <- BXK0031_TN_TP_TSS.Complete[-,c(5:7)]
+BXK0031_CorrPrep <- BXK0031_TN_TP_TSS.Complete[,c(5:7)]
 testRes = cor.mtest(BXK0031_CorrPrep, conf.level = 0.95)
 BXK0031.Corr <- cor(BXK0031_CorrPrep) 
 corrplot(BXK0031.Corr, p.mat = testRes$p, method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
@@ -11,17 +11,40 @@ corrplot(BXK0031.Corr, p.mat = testRes$p, method = "circle", insig = 'blank', ad
 
 list.dfs.Corr <- list(BXK0031_TN_TP_TSS,CCM0069_TN_TP_TSS,EE3.0_TN_TP_TSS,EE3.1_TN_TP_TSS,EE3.2_TN_TP_TSS,EE3.3_TN_TP_TSS,ET6.1_TN_TP_TSS,ET6.2_TN_TP_TSS,ET7.1_TN_TP_TSS,ET8.1_TN_TP_TSS,ET9.1_TN_TP_TSS,ET10.1_TN_TP_TSS,MNK0146_TN_TP_TSS,POK0087_TN_TP_TSS,TRQ0088_TN_TP_TSS,TRQ0146_TN_TP_TSS,WIW0141_TN_TP_TSS,XAK7810_TN_TP_TSS,XCI4078_TN_TP_TSS,XDJ9007_TN_TP_TSS)
 
-Corr.plots <- function(list.dfs.Corr) { 
-  Corr.list <- vector(mode = 'list', length = length(list.dfs.Corr))
-  
-  for (i in 1:length(list.dfs)) {
-    Corr.list[[i]] <- corrplot(cor(list.dfs.Corr[[i]][-list.dfs.Corr[[i]]$=NA, c(5:7)]), method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
-names(Corr.list)[i] <- paste0(list.dfs.Corr[[i]]$MonitoringStation)
+# list.dfs.Corr <- lapply(list.dfs.Corr, na.omit)
+# list.dfs.Corr <- lapply(list.dfs.Corr, select(meanTN:meanTSS))
+
+##function to remove NAs from list
+Corr1 <- function(x) { 
+  for (i in 1:length(x)) {
+    x[[i]] <- na.omit(x[[i]])
     }
-  return(Corr.list)
+  return(x)
 }
 
-Corr.plots(list.dfs.Corr)
+list.dfs.Corr2 <- Corr1(list.dfs.Corr)
+
+##function to select for the last three columns in list (and add names)
+Corr2 <- function(x) { 
+  for (i in 1:length(x)) {
+    x[[i]] <- x[[i]][,c(5:7)]
+    names(x)[i] <- paste0(list.dfs.Corr[[i]]$MonitoringStation)
+    }
+  return(x)
+}
+
+list.dfs.Corr3 <- Corr2(list.dfs.Corr2)
+
+##function to create corr plots
+Corr.plots <- function(x) { 
+  for (i in 1:length(x)) {
+    corrplot(cor(x[[i]]), method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
+#names(Corr.list)[i] <- paste0(list.dfs.Corr[[i]]$MonitoringStation)
+    }
+  return(x)
+}
+
+Corr.plots(list.dfs.Corr3)
 
 # Corr.prep <- function(list.dfs.Corr) { 
 #   Corr.list <- vector(mode = 'list', length = length(list.dfs.Corr))
@@ -34,17 +57,17 @@ Corr.plots(list.dfs.Corr)
 # }
 # corr.list <- list(Corr.prep(list.dfs.Corr))
 
-# Correlation between parameters
-Corr.chrs <- function(list.dfs.Corr) { 
-plot.list.Corr <- vector(mode = 'list', length = length(list.dfs.Corr))
-  
-  for (i in 1:length(list.dfs.Corr)) {
-    plot.list.Corr[[i]] <- list.dfs.Corr2 <- list.dfs.Corr[[i]][,c(5:7)]
-testRes = cor.mtest(list.dfs.Corr2[[i]], conf.level = 0.95)
-list.dfs.Corr3 <- cor(list.dfs.Corr2) 
-corrplot(list.dfs.Corr3, p.mat = testRes$p, method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
-names(plot.list.Corr)[i] <- paste0(list.dfs.Corr[[i]]$MonitoringStation}
-  return(plot.list)
-}
-plot.TN.chrs(list.dfs)
+# # Correlation between parameters
+# Corr.chrs <- function(list.dfs.Corr) { 
+# plot.list.Corr <- vector(mode = 'list', length = length(list.dfs.Corr))
+#   
+#   for (i in 1:length(list.dfs.Corr)) {
+#     plot.list.Corr[[i]] <- list.dfs.Corr2 <- list.dfs.Corr[[i]][,c(5:7)]
+# testRes = cor.mtest(list.dfs.Corr2[[i]], conf.level = 0.95)
+# list.dfs.Corr3 <- cor(list.dfs.Corr2) 
+# corrplot(list.dfs.Corr3, p.mat = testRes$p, method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
+# names(plot.list.Corr)[i] <- paste0(list.dfs.Corr[[i]]$MonitoringStation}
+#   return(plot.list)
+# }
+# plot.TN.chrs(list.dfs)
 ```
