@@ -2,7 +2,7 @@
 library(corrplot)
 
 #Correlation Plots
-BXK0031_CorrPrep <- BXK0031_TN_TP_TSS.Complete[,c(5:7)]
+BXK0031_CorrPrep <- BXK0031_TN_TP_TSS.Complete[-,c(5:7)]
 testRes = cor.mtest(BXK0031_CorrPrep, conf.level = 0.95)
 BXK0031.Corr <- cor(BXK0031_CorrPrep) 
 corrplot(BXK0031.Corr, p.mat = testRes$p, method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
@@ -15,7 +15,7 @@ Corr.plots <- function(list.dfs.Corr) {
   Corr.list <- vector(mode = 'list', length = length(list.dfs.Corr))
   
   for (i in 1:length(list.dfs)) {
-    Corr.list[[i]] <- corrplot(cor(list.dfs.Corr[[i]][,c(5:7)]), method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
+    Corr.list[[i]] <- corrplot(cor(list.dfs.Corr[[i]][-list.dfs.Corr[[i]]=NA, c(5:7)]), method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', diag=TRUE)
 names(Corr.list)[i] <- paste0(list.dfs.Corr[[i]]$MonitoringStation)
     }
   return(Corr.list)
