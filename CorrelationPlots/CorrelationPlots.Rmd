@@ -46,6 +46,18 @@ Corr.plots <- function(x) {
 
 Corr.plots(list.dfs.Corr3)
 
+##function to create ggcorr plots
+install.packages("ggcorrplot")
+
+ggcorr.plots <- function(x) { 
+  for (i in 1:length(x)) {
+    ggcorrplot::ggcorrplot(cor(x[[i]]))
+    }
+  return(x)
+}
+
+ggcorr.plots(list.dfs.Corr3)
+
 ##use log function to map correlation to radius of the circle
 
 # Corr.prep <- function(list.dfs.Corr) { 
