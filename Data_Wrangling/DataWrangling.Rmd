@@ -220,6 +220,8 @@ EE3.0_TN_TP_TSS.Merged <- EE3.0_TN_TP_TSS.Merged %>%
   mutate(meanTN = zoo::na.approx(meanTN))
 EE3.0_TN_TP_TSS.Merged <- EE3.0_TN_TP_TSS.Merged %>%
   mutate(meanTP = zoo::na.approx(meanTP))
+EE3.0_TN_TP_TSS.Merged <- EE3.0_TN_TP_TSS.Merged %>%
+  mutate(meanTSS = zoo::na.approx(meanTSS))
 
 ##EE3.1
 EE3.1_TN_TP_TSS.Complete <- EE3.1_TN_TP_TSS %>%

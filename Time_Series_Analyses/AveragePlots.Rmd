@@ -1,0 +1,16 @@
+``` {r}
+# Merging Data frames
+Plots.Dataframe <- rbind(EE3.0_TN_TP_TSS.Merged,ET6.1_TN_TP_TSS.Merged,ET6.2_TN_TP_TSS.Merged,ET7.1_TN_TP_TSS.Merged,ET8.1_TN_TP_TSS.Merged,ET9.1_TN_TP_TSS.Merged,ET10.1_TN_TP_TSS.Merged)
+
+Plots.Dataframe <- Plots.Dataframe %>% 
+  separate(year_month, c("year", "month", "day")) 
+
+Plots.Dataframe$year <- as.Date(Plots.Dataframe$year, format = "%Y-%m-%d")
+
+TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Final %>%
+  group_by(MonitoringStation, Latitude, Longitude, year_month) %>%
+  group
+  summarize(meanTN = mean(TN),
+            meanTP = mean(TP),
+            meanTSS = mean(TSS))
+```
