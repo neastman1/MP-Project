@@ -38,13 +38,27 @@ list.dfs.Corr3 <- Corr2(list.dfs.Corr2)
 ##function to create corr plots
 Corr.plots <- function(x) { 
   for (i in 1:length(x)) {
-    corrplot(cor(x[[i]]), method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', title = list.dfs.Corr[[i]]$MonitoringStation, diag=TRUE)
+    corrplot(cor(x[[i]]), method = "circle", insig = 'blank', addCoef.col ='white',number.cex = 0.8, order = 'AOE', 
+             #title = list.dfs.Corr[[i]]$MonitoringStation, 
+             diag=TRUE)
 #names(Corr.list)[i] <- paste0(list.dfs.Corr[[i]]$MonitoringStation)
     }
   return(x)
 }
 
 Corr.plots(list.dfs.Corr3)
+
+##function to create ggcorr plots
+install.packages("ggcorrplot")
+
+ggcorr.plots <- function(x) { 
+  for (i in 1:length(x)) {
+    ggcorrplot::ggcorrplot(cor(x[[i]]))
+    }
+  return(x)
+}
+
+ggcorr.plots(list.dfs.Corr3)
 
 ##use log function to map correlation to radius of the circle
 
