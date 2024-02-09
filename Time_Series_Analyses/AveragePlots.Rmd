@@ -2,15 +2,29 @@
 # Merging Data frames
 Plots.Dataframe <- rbind(EE3.0_TN_TP_TSS.Merged,ET6.1_TN_TP_TSS.Merged,ET6.2_TN_TP_TSS.Merged,ET7.1_TN_TP_TSS.Merged,ET8.1_TN_TP_TSS.Merged,ET9.1_TN_TP_TSS.Merged,ET10.1_TN_TP_TSS.Merged)
 
+#Separating year from date column
 Plots.Dataframe <- Plots.Dataframe %>% 
-  separate(year_month, c("year", "month", "day")) 
+  dplyr::mutate(year = lubridate::year(year_month), month= lubridate::month(year_month), day = lubridate::day(year_month))
 
-Plots.Dataframe$year <- as.Date(Plots.Dataframe$year, format = "%Y-%m-%d")
+#Creating yearly average
+Yearly.Averages <- Plots.Dataframe %>%
+  group_by(MonitoringStation,year) %>%
+  summarize(mean_TN = mean(meanTN),
+            mean_TP = mean(meanTP),
+            mean_TSS = mean(meanTSS))
+```
 
-TN.TP.TSS.Data.Final <- TN.TP.TSS.Data.Final %>%
-  group_by(MonitoringStation, Latitude, Longitude, year_month) %>%
-  group
-  summarize(meanTN = mean(TN),
-            meanTP = mean(TP),
-            meanTSS = mean(TSS))
+```{r}
+Yearly.TN.Plot <- ggplot(Yearly.Averages, aes(x=year, y=mean_TN, group=MonitoringStation, color=MonitoringStation)) +
+  geom_line()
+Yearly.TN.Plot
+#add vertical line, change axis divisions, add titles, change label names
+
+Yearly.TP.Plot <- ggplot(Yearly.Averages, aes(x=year, y=mean_TP, group=MonitoringStation, color=MonitoringStation)) +
+  geom_line()
+Yearly.TP.Plot
+
+Yearly.TSS.Plot <- ggplot(Yearly.Averages, aes(x=year, y=mean_TSS, group=MonitoringStation, color=MonitoringStation)) +
+  geom_line()
+Yearly.TSS.Plot
 ```
