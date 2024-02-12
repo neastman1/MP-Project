@@ -1,6 +1,13 @@
 ``` {r}
 #install.packages("wesanderson")
 library(wesanderson)
+#install.packages("ggsci")
+library(ggsci)
+#install.packages("viridis")
+library(viridis)
+#install.packages("RColorBrewer")
+library(RColorBrewer)
+
 # Merging Data frames
 Plots.Dataframe <- rbind(EE3.0_TN_TP_TSS.Merged,ET6.1_TN_TP_TSS.Merged,ET6.2_TN_TP_TSS.Merged,ET7.1_TN_TP_TSS.Merged,ET8.1_TN_TP_TSS.Merged,ET9.1_TN_TP_TSS.Merged,ET10.1_TN_TP_TSS.Merged)
 
@@ -24,16 +31,18 @@ Yearly.TN.Plot <- ggplot(Yearly.Averages, aes(x=year, y=mean_TN, group=Monitorin
   geom_vline(xintercept = 2010, linetype = "dashed", color = "black", size = 1) +
   scale_x_continuous(breaks=seq(1985,2025,5)) +
   scale_color_discrete(name = "Monitoring Stations") +
-  scale_color_manual(values=wes_palette(name = "Zissou1", type = "discrete"))
+  #scale_color_lancet() + theme_bw() +
+  scale_color_aaas()
 Yearly.TN.Plot
 
 Yearly.TP.Plot <- ggplot(Yearly.Averages, aes(x=year, y=mean_TP, group=MonitoringStation, color=MonitoringStation)) +
-  geom_line() +
+  geom_line +
   xlab("Year") +
   ylab("Concentration (mg/L)") + 
   geom_vline(xintercept = 2010, linetype = "dashed", color = "black", size = 1) +
   scale_x_continuous(breaks=seq(1985,2025,5)) +
-  scale_color_discrete(name = "Monitoring Stations")
+  scale_color_brewer(palette = "Dark2") +
+  theme_bw()
 Yearly.TP.Plot
 
 Yearly.TSS.Plot <- ggplot(Yearly.Averages, aes(x=year, y=mean_TSS, group=MonitoringStation, color=MonitoringStation)) +
@@ -42,6 +51,7 @@ Yearly.TSS.Plot <- ggplot(Yearly.Averages, aes(x=year, y=mean_TSS, group=Monitor
   ylab("Concentration (mg/L)") + 
   geom_vline(xintercept = 2010, linetype = "dashed", color = "black", size = 1) +
   scale_x_continuous(breaks=seq(1985,2025,5)) +
-  scale_color_discrete(name = "Monitoring Stations")
+  scale_color_discrete(name = "Monitoring Stations") +
+  theme_bw()
 Yearly.TSS.Plot
 ```
