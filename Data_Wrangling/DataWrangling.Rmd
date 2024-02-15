@@ -133,6 +133,7 @@ plot.TN.chrs <- function(list.dfs) {
   for (i in 1:length(list.dfs)) {
     plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=year_month, y=meanTN)) +
                       geom_line() +
+                      theme_bw() +
                       ggtitle(list.dfs[[i]]$MonitoringStation)
     names(plot.list)[i] <- paste0(list.dfs[[i]]$MonitoringStation)
   }
@@ -149,6 +150,7 @@ plot.TP.chrs <- function(list.dfs) {
   for (i in 1:length(list.dfs)) {
     plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=year_month, y=meanTP)) +
                       geom_line() +
+                      theme_bw() +
                       ggtitle(list.dfs[[i]]$MonitoringStation)
     names(plot.list)[i] <- paste0(list.dfs[[i]]$MonitoringStation)
   }
@@ -165,6 +167,7 @@ plot.TSS.chrs <- function(list.dfs) {
   for (i in 1:length(list.dfs)) {
     plot.list[[i]] <- ggplot(list.dfs[[i]], aes(x=year_month, y=meanTSS)) +
                       geom_line() +
+                      theme_bw() +
                       ggtitle(list.dfs[[i]]$MonitoringStation)
     names(plot.list)[i] <- paste0(list.dfs[[i]]$MonitoringStation)
   }
